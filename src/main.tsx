@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //Layouts
-import { Error404 } from "./pages/error/Error404";
+import { ErrorPage } from "./pages/error/ErrorPage";
 import { PrivateRoutes, PublicRoutes } from './routes';
 import PublicLayout from './routes/PublicLayout';
 import PrivateLayout from './routes/PrivateLayout';
@@ -15,13 +15,13 @@ const router = createBrowserRouter([
         path: "/",
         element: <PublicLayout />,
         children: PublicRoutes,
-        errorElement: <Error404 />
+        errorElement: <ErrorPage />
     },
     {
         path: "/admin/",
         element: <PrivateLayout />,
         children: PrivateRoutes,
-        errorElement: <Error404 />
+        errorElement: <ErrorPage />
     },
 ]);
 
