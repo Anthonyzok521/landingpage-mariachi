@@ -1,10 +1,10 @@
 module.exports.SITE = {
-  name: 'TailNext',
+  name: 'Mariachi Cocula Internacional',
 
-  origin: 'https://tailnext.vercel.app',
+  origin: 'https://mariachici.com',
   basePathname: '/',
   trailingSlash: false,
 
-  title: 'TailNext — Your website with Next.js + Tailwind CSS',
-  description: 'TailNext is a free and ready to start template to make your website using Next.js and Tailwind CSS.',
+  title: 'Mariachi Cocula Internacional',
+  description: 'La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo.',
 };

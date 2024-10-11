@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { HeroProps } from '~/shared/types';
 import CTA from '../common/CTA';
+import fontTitle from '~/fonts';
 
 const Hero = ({ title, subtitle, tagline, callToAction, callToAction2, image }: HeroProps) => {
   return (
@@ -14,15 +15,14 @@ const Hero = ({ title, subtitle, tagline, callToAction, callToAction2, image }: 
               </p>
             )}
             {title && (
-              <h1 className="leading-tighter font-heading mb-6 text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl">
-                {title}
-              </h1>
+                <h1 className={`${fontTitle.className} text-yellow-400 mb-6 text-5xl lg:text-6xl`}>
+                  {title}
+                </h1>
             )}
             <div className="mx-auto max-w-3xl">
               {subtitle && <p className="mb-6 text-xl font-normal text-gray-600 dark:text-slate-400">{subtitle}</p>}
               <div className="flex max-w-none flex-col flex-nowrap gap-4 px-4 sm:flex-row sm:justify-center">
-                {callToAction && <CTA callToAction={callToAction} linkClass="btn btn-primary" />}
-                {callToAction2 && <CTA callToAction={callToAction2} linkClass="btn" />}
+                {callToAction && <CTA callToAction={callToAction} linkClass="btn bg-yellow-400" />}
               </div>
             </div>
           </div>

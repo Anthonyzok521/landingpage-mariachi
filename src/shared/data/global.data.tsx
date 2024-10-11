@@ -1,228 +1,31 @@
 import {
   IconBrandFacebook,
-  IconBrandGithub,
   IconBrandInstagram,
-  IconBrandTwitter,
-  IconChevronDown,
-  IconRss,
 } from '@tabler/icons-react';
-import { AnnouncementProps, FooterProps, HeaderProps } from '../types';
-
-// Announcement data
-export const announcementData: AnnouncementProps = {
-  title: 'NEW',
-  callToAction: {
-    text: 'This template is made with Next.js 14 using the new App Router »',
-    href: 'https://nextjs.org/blog/next-14',
-  },
-  callToAction2: {
-    text: 'Follow @onWidget on Twitter',
-    href: 'https://twitter.com/intent/user?screen_name=onwidget',
-  },
-};
+import { FooterProps, HeaderProps } from '../types';
 
 // Header data
 export const headerData: HeaderProps = {
-  links: [
+  links: [        
     {
-      label: 'Pages',
-      icon: IconChevronDown,
-      links: [
-        {
-          label: 'Services',
-          href: '/services',
-        },
-        {
-          label: 'Pricing',
-          href: '/pricing',
-        },
-        {
-          label: 'About us',
-          href: '/about',
-        },
-        {
-          label: 'Contact us',
-          href: '/contact',
-        },
-        {
-          label: 'FAQs',
-          href: '/faqs',
-        },
-        {
-          label: 'Terms & Conditions',
-          href: '/terms',
-        },
-        {
-          label: 'Privacy Policy',
-          href: '/privacy',
-        },
-      ],
+      label: 'Inicio',
+      href: '/',
     },
     {
-      label: 'Blog',
-      href: '/blog',
+      label: 'Eventos',
+      href: '/events',
     },
     {
-      label: 'Contact',
-      href: '/contact',
+      label: 'Galería',
+      href: '/gallery',
     },
-  ],
-  actions: [
-    {
-      text: 'Download',
-      href: 'https://github.com/onwidget/tailnext',
-      targetBlank: true,
-    },
-  ],
+  ],  
   isSticky: true,
   showToggleTheme: true,
   showRssFeed: false,
   position: 'right',
 };
 
-// Footer data
-export const footerData: FooterProps = {
-  title: 'TailNext',
-  links: [
-    {
-      label: 'Terms & Conditions',
-      href: '/terms',
-    },
-    {
-      label: 'Privacy Policy',
-      href: '/privacy',
-    },
-  ],
-  columns: [
-    {
-      title: 'Product',
-      links: [
-        {
-          label: 'Features',
-          href: '/',
-        },
-        {
-          label: 'Security',
-          href: '/',
-        },
-        {
-          label: 'Team',
-          href: '/',
-        },
-        {
-          label: 'Enterprise',
-          href: '/',
-        },
-        {
-          label: 'Customer stories',
-          href: '/',
-        },
-        {
-          label: 'Pricing',
-          href: '/pricing',
-        },
-        {
-          label: 'Resources',
-          href: '/',
-        },
-      ],
-    },
-    {
-      title: 'Platform',
-      links: [
-        {
-          label: 'Developer API',
-          href: '/',
-        },
-        {
-          label: 'Partners',
-          href: '/',
-        },
-      ],
-    },
-    {
-      title: 'Support',
-      links: [
-        {
-          label: 'Docs',
-          href: '/',
-        },
-        {
-          label: 'Community Forum',
-          href: '/',
-        },
-        {
-          label: 'Professional Services',
-          href: '/',
-        },
-        {
-          label: 'Skills',
-          href: '/',
-        },
-        {
-          label: 'Status',
-          href: '/',
-        },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        {
-          label: 'About',
-          href: '/',
-        },
-        {
-          label: 'Blog',
-          href: '/blog',
-        },
-        {
-          label: 'Careers',
-          href: '/',
-        },
-        {
-          label: 'Press',
-          href: '/',
-        },
-        {
-          label: 'Inclusion',
-          href: '/',
-        },
-        {
-          label: 'Social Impact',
-          href: '/',
-        },
-        {
-          label: 'Shop',
-          href: '/',
-        },
-      ],
-    },
-  ],
-  socials: [
-    { label: 'Twitter', icon: IconBrandTwitter, href: '#' },
-    { label: 'Instagram', icon: IconBrandInstagram, href: '#' },
-    { label: 'Facebook', icon: IconBrandFacebook, href: '#' },
-    { label: 'RSS', icon: IconRss, href: '#' },
-    { label: 'Github', icon: IconBrandGithub, href: 'https://github.com/onwidget/tailnext' },
-  ],
-  footNote: (
-    <div className="mr-4 rtl:mr-0 rtl:ml-4 text-sm">
-      <span className="float-left rtl:float-right mr-1.5 rtl:mr-0 rtl:ml-1.5 h-5 w-5 rounded-sm bg-[url(https://onwidget.com/favicon/favicon-32x32.png)] bg-cover md:-mt-0.5 md:h-6 md:w-6"></span>
-      <span>
-        Made by{' '}
-        <a
-          className="font-semibold text-slate-900 dark:text-gray-200 hover:text-blue-600 hover:underline dark:hover:text-blue-600"
-          href="https://onwidget.com/"
-        >
-          {' '}
-          onWidget
-        </a>{' '}
-        · All rights reserved.
-      </span>
-    </div>
-  ),
-};
 
 // Footer2 data
 export const footerData2: FooterProps = {
@@ -238,30 +41,42 @@ export const footerData2: FooterProps = {
   ],
   columns: [
     {
-      title: 'Address',
-      texts: ['51 Phasellus Avenue Maecenas', 'Aliquam, AQ 52098'],
+      title: 'Dirección',
+      texts: ['Colombia', 'Bogotá'],
     },
     {
-      title: 'Phone',
-      texts: ['Reception: +105 123 4567', 'Office: +107 235 7890'],
+      title: 'Teléfono',
+      texts: ['Principal: +57 302 2305738', 'Secundario: +57 310 7726932'],
     },
     {
       title: 'Email',
-      texts: ['Office: info@example.com', 'Site: https://example.com'],
+      texts: ['Info: contact@mariachici.com', 'Web: https://mariachici.com'],
     },
   ],
   socials: [
-    { label: 'Twitter', icon: IconBrandTwitter, href: '#' },
     { label: 'Instagram', icon: IconBrandInstagram, href: '#' },
     { label: 'Facebook', icon: IconBrandFacebook, href: '#' },
-    { label: 'RSS', icon: IconRss, href: '#' },
-    { label: 'Github', icon: IconBrandGithub, href: 'https://github.com/onwidget/tailnext' },
   ],
   footNote: (
-    <div className="mr-4 rtl:mr-0 rtl:ml-4 text-sm">
+    <div className="flex gap-32 mr-4 rtl:mr-0 rtl:ml-4 text-sm">
+      <div>
+      <span className="float-left rtl:float-right mr-1.5 rtl:mr-0 rtl:ml-1.5 h-5 w-5 rounded-sm bg-[url(https://acteam.dev/ac-logo.svg)] bg-cover md:-mt-0.5 md:h-6 md:w-[37px]"></span>
+      <span>
+        Creado por{' '}
+        <a
+          className="font-semibold text-slate-900 dark:text-gray-200 hover:text-blue-600 hover:underline dark:hover:text-blue-600"
+          href="https://acteam.dev/"
+        >
+          {' '}
+          Advanced Community
+        </a>{' '}
+        · All rights reserved.
+      </span>
+      </div>
+      <div>
       <span className="float-left rtl:float-right mr-1.5 rtl:mr-0 rtl:ml-1.5 h-5 w-5 rounded-sm bg-[url(https://onwidget.com/favicon/favicon-32x32.png)] bg-cover md:-mt-0.5 md:h-6 md:w-6"></span>
       <span>
-        Made by{' '}
+        Impulsado por{' '}
         <a
           className="font-semibold text-slate-900 dark:text-gray-200 hover:text-blue-600 hover:underline dark:hover:text-blue-600"
           href="https://onwidget.com/"
@@ -271,6 +86,7 @@ export const footerData2: FooterProps = {
         </a>{' '}
         · All rights reserved.
       </span>
+      </div>
     </div>
   ),
 };

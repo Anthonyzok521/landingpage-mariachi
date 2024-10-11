@@ -30,6 +30,7 @@ type HeadlineProps = {
   containerClass?: string;
   titleClass?: string;
   subtitleClass?: string;
+  color?: boolean
 };
 
 type Icon = TablerIcon;
@@ -142,56 +143,11 @@ type Timeline = {
   descriptionClass?: string;
 };
 
-type Team = {
-  name: string;
-  occupation: string;
-  image: Image;
-  items?: Array<Item>;
-  containerClass?: string;
-  imageClass?: string;
-  panelClass?: string;
-  nameClass?: string;
-  occupationClass?: string;
-  itemsClass?: string;
-};
-
-type Testimonial = {
-  testimonial?: string;
-  startSlice?: number;
-  endSlice?: number;
-  isTestimonialUp?: boolean;
-  hasDividerLine?: boolean;
-  name?: string;
-  job?: string;
-  image?: Image;
-  href?: string;
-  containerClass?: string;
-  panelClass?: string;
-  imageClass?: string;
-  dataClass?: string;
-  nameJobClass?: string;
-  nameClass?: string;
-  jobClass?: string;
-  testimonialClass?: string;
-};
-
 type Link = {
   label?: string;
   href?: string;
   ariaLabel?: string;
   icon?: Icon;
-};
-
-type Price = {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  price?: number;
-  period?: string;
-  items?: Array<Item>;
-  callToAction?: CallToActionType;
-  hasRibbon?: boolean;
-  ribbonTitle?: string;
 };
 
 type Column = {
@@ -243,21 +199,6 @@ type HeroProps = {
   image?: Image;
 };
 
-type FAQsProps = Widget & {
-  header?: Header;
-  items?: Array<Item>;
-  columns?: number;
-  tabs?: Array<Tab>;
-  callToAction?: CallToActionType;
-};
-
-type CollapseProps = {
-  items: Array<Item>;
-  classCollapseItem?: string;
-  iconUp?: ReactElement;
-  iconDown?: ReactElement;
-};
-
 type CallToActionProps = Widget & {
   title: string;
   subtitle: string;
@@ -294,41 +235,6 @@ type StepsProps = Widget & {
   image?: Image;
   /** Do you want to reverse the widget? */
   isReversed?: boolean;
-};
-
-type TeamProps = Widget & {
-  header?: Header;
-  teams: Array<Team>;
-};
-
-type AnnouncementProps = {
-  title: string;
-  callToAction?: CallToActionType;
-  callToAction2?: CallToActionType;
-};
-
-type TestimonialsProps = Widget & {
-  header?: Header;
-  testimonials: Array<Testimonial>;
-  isTestimonialUp?: boolean;
-  hasDividerLine?: boolean;
-  startSlice?: number;
-  endSlice?: number;
-  callToAction?: CallToActionType;
-};
-
-type PricingProps = Widget & {
-  header?: Header;
-  prices: Array<Price>;
-};
-
-type ComparisonProps = Widget & {
-  header?: Header;
-  columns: Array<Column>;
-};
-
-type StatsProps = Widget & {
-  items: Array<Item>;
 };
 
 type SocialProofProps = Widget & {

@@ -1,7 +1,7 @@
 import { HeadlineProps } from '~/shared/types';
 import { twMerge } from 'tailwind-merge';
 
-const Headline = ({ header, containerClass, titleClass, subtitleClass }: HeadlineProps) => {
+const Headline = ({ header, containerClass, titleClass, subtitleClass, color }: HeadlineProps) => {
   const { title, subtitle, tagline, position } = header;
 
   return (
@@ -16,7 +16,7 @@ const Headline = ({ header, containerClass, titleClass, subtitleClass }: Headlin
           )}
         >
           {tagline && (
-            <p className="text-base font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-200">
+            <p className={`text-base font-semibold uppercase tracking-wide ${color ? 'text-yellow-400' : 'text-black'} dark:text-primary-200`}>
               {tagline}
             </p>
           )}

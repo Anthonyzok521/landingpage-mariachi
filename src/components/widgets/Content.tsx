@@ -1,10 +1,12 @@
-import Image from 'next/image';
-import { IconCheck } from '@tabler/icons-react';
+'use client';
 
+import { IconCheck } from '@tabler/icons-react';
 import { ContentProps } from '~/shared/types';
 import Headline from '../common/Headline';
 import WidgetWrapper from '../common/WidgetWrapper';
-import ItemGrid from '../common/ItemGrid';
+import { type TypeLocationsMap, Locations } from "~/shared/data/pages/locations";
+import ApiMap from './Map';
+import MyMapComponent from './Map';
 
 const Content = ({
   header,
@@ -15,8 +17,9 @@ const Content = ({
   isAfterContent,
   id,
   hasBackground = false,
-}: ContentProps) => (
-  <WidgetWrapper
+}: ContentProps) => {
+
+  return <WidgetWrapper
     id={id ? id : ''}
     hasBackground={hasBackground}
     containerClass={`${isAfterContent ? 'py-0 md:py-0 lg:py-0 pb-12 md:pb-16 lg:pb-20' : ''}`}
@@ -26,19 +29,16 @@ const Content = ({
       <div className={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} md:gap-16`}>
         <div className="self-center md:basis-1/2">
           {content && <div className="mb-8 lg:mb-12 text-lg text-gray-600 dark:text-slate-400">{content}</div>}
-          <ItemGrid
-            items={items}
-            columns={1}
-            defaultIcon={IconCheck}
-            containerClass="gap-4 md:gap-y-6"
-            panelClass="flex max-w-full"
-            titleClass="text-lg font-medium leading-6 text-gray-900 dark:text-white mt-1 mb-2"
-            descriptionClass="mt-1 text-gray-600 dark:text-slate-400"
-            iconClass="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-primary-900 text-gray-50 mr-4 rtl:mr-0 rtl:ml-4 mt-1 p-1"
-          />
+          <ul className=' justify-between columns-2'>
+            {Locations.map((l: TypeLocationsMap, index) => 
+              <li className='p-2 flex items-center gap-1'><IconCheck className='rounded-xl bg-blue-700 p-1 text-white'/> {l[0]}</li>
+            )}
+          </ul>
+          <h2 className='font-semibold text-xl text-center'>Y muchos más</h2>
         </div>
+
         <div aria-hidden="true" className="mt-10 md:mt-0 md:basis-1/2">
-          {image && (
+          {/* {image && (
             <div className="relative m-auto max-w-4xl">
               <Image
                 className="mx-auto w-full rounded-lg shadow-lg bg-gray-400 dark:bg-slate-700"
@@ -51,11 +51,12 @@ const Content = ({
                 quality={50}
               />
             </div>
-          )}
+          )} */}
+          <MyMapComponent />
         </div>
       </div>
     </div>
   </WidgetWrapper>
-);
+}
 
 export default Content;

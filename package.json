@@ -1,7 +1,7 @@
 {
-  "name": "@onwidget/tailnext",
-  "description": "A template to make your website using Next.js + Tailwind CSS.",
-  "version": "1.0.0-beta.4",
+  "name": "mariachicocularinternacional",
+  "description": "Un LandingPage para una agrupación de mariachis en colombia",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -22,6 +22,7 @@
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.2"
   },

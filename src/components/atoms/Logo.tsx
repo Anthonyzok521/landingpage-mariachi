@@ -1,6 +1,8 @@
+import fontTitle from "~/fonts";
+
 const Logo = () => (
-  <span className="ml-2 self-center whitespace-nowrap text-2xl font-bold text-gray-900 dark:text-white md:text-xl">
-    TailNext
+  <span className={`${fontTitle.className} text-yellow-500 ml-2 self-center whitespace-nowrap text-2xl font-bold md:text-xl`}>
+    MCI
   </span>
 );
 
