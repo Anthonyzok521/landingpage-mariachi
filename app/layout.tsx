@@ -30,17 +30,19 @@ export default function RootLayout({ children }: LayoutProps) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="Mariachi Cocula internacional" />
-        <meta property="og:description" content="La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo." />
-        <meta property="og:image" content="https://cdn.mariachici.com/images/card.png" />
+        <meta name="description" content="La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo." />
         <meta property="og:url" content="https://mariachici.com" />
-        <meta property="og:site_name" content="Mariachi Cocula Internacional" />
         <meta property="og:type" content="website" />
+        <meta property="og:title" content="Mariachi Cocula Internacional" />
+        <meta property="og:description" content="La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo." />
+        <meta property="og:image" content="https://opengraph.b-cdn.net/production/images/c070be28-c39b-4ffa-978c-0b632091376a.png?token=Aq-bwiQcbO-YxWRLsonSO_86Ou7TfZMYxJXMvmS_k-4&height=630&width=1200&expires=33264842989" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Mariachi Cocula internacional" />
+        <meta property="twitter:domain" content="mariachici.com" />
+        <meta property="twitter:url" content="https://mariachici.com" />
+        <meta name="twitter:title" content="Mariachi Cocula Internacional" />
         <meta name="twitter:description" content="La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo." />
-        <meta name="twitter:image" content="https://cdn.mariachici.com/images/card.png" />
-        <meta name="keywords" content="mariachi cocula internacional, mariachis en colombia, mariachi cocula, mariachi colombia, colombia, cundinamarca, bogota, zipaquira, nemocon, tabio, mci, mariachi bogota, mariachicoculainternacional, mariachis cocula, mariachi internacional, mariachi zipaquira, mariachi jean carlos loreto, mariachi loreto, mariachi carlos" />
+        <meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/c070be28-c39b-4ffa-978c-0b632091376a.png?token=Aq-bwiQcbO-YxWRLsonSO_86Ou7TfZMYxJXMvmS_k-4&height=630&width=1200&expires=33264842989" />
+        <link rel="icon" href="/icon.svg" type="image/svg" />
       </head>
       <body className="tracking-tight antialiased text-gray-900 dark:text-slate-300 dark:bg-slate-900">
         <Providers>
