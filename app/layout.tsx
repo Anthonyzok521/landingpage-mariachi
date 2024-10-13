@@ -42,7 +42,6 @@ export default function RootLayout({ children }: LayoutProps) {
         <meta name="twitter:title" content="Mariachi Cocula Internacional" />
         <meta name="twitter:description" content="La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo." />
         <meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/c070be28-c39b-4ffa-978c-0b632091376a.png?token=Aq-bwiQcbO-YxWRLsonSO_86Ou7TfZMYxJXMvmS_k-4&height=630&width=1200&expires=33264842989" />
-        <link rel="icon" href="/icon.svg" type="image/svg" />
       </head>
       <body className="tracking-tight antialiased text-gray-900 dark:text-slate-300 dark:bg-slate-900">
         <Providers>
