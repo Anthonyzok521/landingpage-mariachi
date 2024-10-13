@@ -2,7 +2,7 @@ const SITE = require('./src/config.js').SITE;
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  output: 'export',
+  /* output: 'export', */
   reactStrictMode: true,
 
   trailingSlash: SITE.trailingSlash,
@@ -23,6 +23,8 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'cdn.mariachici.com',
+        port: '',
+        pathname: '/images/**',
       },
       ], 
     }
