@@ -26,6 +26,12 @@ module.exports = {
         port: '',
         pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'opengraph.b-cdn.net',
+        port: '',
+        pathname: '/production/images/**',
+      },
       ], 
     }
 };
