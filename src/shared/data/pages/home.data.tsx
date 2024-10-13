@@ -1,10 +1,6 @@
 import {
   IconArrowDown,
-  IconClock,
   IconPhone,
-  IconMail,
-  IconMapPin,
-  IconPhoneCall,
   IconMicrophone2,
   IconConfetti,
   IconCake,
@@ -20,8 +16,12 @@ import {
   HeroProps,
   StepsProps,
 } from '../../types';
-import heroImg from '~/assets/images/portada.jpg';
-import gasImg from '~/assets/images/steps.jpg';
+import { ConfigCollection } from '~/utils/configCollections';
+
+interface IDataImage {
+  banner: string
+  steps: string
+}
 
 // Hero data on Home page *******************
 export const heroHome: HeroProps = {
@@ -47,10 +47,16 @@ export const heroHome: HeroProps = {
     text: 'Learn more',
     href: '/',
   },
-  image: {
-    src: heroImg,
-    alt: 'Hero TailNext',
-  },
+  image: async () => {
+    const result = await ConfigCollection.getImages()
+    const i = Object.values(result) as Array<any>
+    const data = i[2].images as IDataImage;
+    const image = {
+      banner: { src: data.banner, alt: 'Portada' }
+    };
+
+    return image;
+  }
 };
 
 // Features data on Home page *******************
@@ -164,9 +170,15 @@ export const stepsHome: StepsProps = {
   hasBackground: false,
   isReversed: false,
   isImageDisplayed: true,
-  image: {
-    src: gasImg,
-    alt: 'Steps image',
+  image: async () => {
+    const result = await ConfigCollection.getImages()
+    const i = Object.values(result) as Array<any>
+    const data = i[2].images as IDataImage;
+    const image = {
+      steps: { src: data.steps, alt: 'Steps' },
+    };
+
+    return image;
   },
   header: {
     title: '¿Sigues con dudas? Aqui un resumen',
@@ -205,24 +217,7 @@ export const contactHome: ContactProps = {
     tagline: 'Contacto',
   },
   content:
-    'Mariachi Cocula Internacional es la mejor opción para tus fiestas y eventos. Acompañamos a grandes artistas y tenemos el mejor repertorio para tu espectáculo.',
-  items: [
-    {
-      title: 'Dirección',
-      description: ['Bogotá'],
-      icon: IconMapPin,
-    },
-    {
-      title: 'Contacto',
-      description: ['Teléfono: +57 302 2305738', 'Email: contact@mariachici.com'],
-      icon: IconPhoneCall,
-    },
-    {
-      title: 'Horario',
-      description: ['Lunes - Viernes: 07:00 - 00:00', 'Saturday & Sunday: 08:00 - 23:00'],
-      icon: IconClock,
-    },
-  ],
+    'Mariachi Cocula Internacional es la mejor opción para tus fiestas y eventos. Acompañamos a grandes artistas y tenemos el mejor repertorio para tu espectáculo.',  
   form: {
     title: 'Enviar un correo',
     inputs: [
@@ -261,34 +256,5 @@ export const callToAction2Home: CallToActionProps = {
     text: '¡Contratar ahora!',
     href: 'https://api.whatsapp.com/send?phone=+573022305738&text=Hola!',
     icon: IconPhone,
-  },
-  items: [
-    {
-      title: 'Get template',
-      description: 'Aliquam sodales est lectus, quis.',
-      href: 'https://github.com/onwidget/tailnext',
-    },
-    {
-      title: 'Learn more',
-      description: 'Class aptent taciti sociosqu ad litora torquent per conubia.',
-      href: '/',
-    },
-    {
-      title: 'Subscribe',
-      description: 'Morbi orci nunc, euismod ac dui id, convallis.',
-      form: {
-        icon: IconMail,
-        input: {
-          type: 'email',
-          name: 'email',
-          autocomplete: 'email',
-          placeholder: 'Enter your email address',
-        },
-        btn: {
-          title: 'Subscribe',
-          type: 'submit',
-        },
-      },
-    },
-  ],
+  }
 };

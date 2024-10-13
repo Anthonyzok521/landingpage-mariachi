@@ -2,6 +2,7 @@ const SITE = require('./src/config.js').SITE;
 
 /** @type {import('next').NextConfig} */
 module.exports = {
+  /* output: 'export', */
   reactStrictMode: true,
 
   trailingSlash: SITE.trailingSlash,
@@ -19,6 +20,10 @@ module.exports = {
         protocol: 'https',
         hostname: 'source.unsplash.com',
       },
-    ],
-  }
+      {
+        protocol: 'https',
+        hostname: 'cdn.mariachici.com',
+      },
+      ], 
+    }
 };

@@ -1,7 +1,33 @@
+import { IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 import { footerData2 } from '~/shared/data/global.data';
+import { ConfigCollection } from '~/utils/configCollections';
 
-const Footer2 = () => {
-  const { links, columns, socials, footNote } = footerData2;
+const Footer2 = async () => {
+  const c = await ConfigCollection.getContacts();
+  const cc = Object.values(c)[2] as any;
+  const contacts = cc.contacts
+  
+  const { links, footNote } = footerData2;
+
+  const columns = [
+    {
+      title: 'Dirección',
+      texts: ['Colombia'],
+    },
+    {
+      title: 'Teléfono',
+      texts: [`Principal: ${contacts.phone.primary}`, `Secundario: ${contacts.phone.secondary}`],
+    },
+    {
+      title: 'Email',
+      texts: [`Info: ${contacts.email}`, 'Web: https://mariachici.com'],
+    },
+  ];
+
+  const socials = [
+    { label: 'Instagram', icon: IconBrandInstagram, href: `${contacts.social.instagram}` },
+    { label: 'Facebook', icon: IconBrandFacebook, href: `${contacts.social.facebook}` },
+  ]
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6">

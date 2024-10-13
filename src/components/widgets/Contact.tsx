@@ -2,9 +2,36 @@ import Form from '../common/Form';
 import Headline from '../common/Headline';
 import { ContactProps } from '~/shared/types';
 import WidgetWrapper from '../common/WidgetWrapper';
+import { IconClock, IconMapPin, IconPhoneCall } from '@tabler/icons-react';
+import { ConfigCollection } from '~/utils/configCollections';
 
-const Contact = ({ header, content, items, form, id, hasBackground = false }: ContactProps) => (
-  <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="max-w-6xl">
+const Contact = async ({ header, content, form, id, hasBackground = false }: ContactProps) => {
+  const c = await ConfigCollection.getContacts();
+  const cc = Object.values(c)[2] as any;
+  const contacts = cc.contacts
+  const h = await ConfigCollection.getHours();
+  const hh = Object.values(h)[2] as any;
+  const hours = hh.hours;
+
+  const items = [
+    {
+      title: 'Dirección',
+      description: ['Colombia'],
+      icon: IconMapPin,
+    },
+    {
+      title: 'Contacto',
+      description: [`Teléfono: ${contacts.phone.primary}`, `Email: ${contacts.email}`],
+      icon: IconPhoneCall,
+    },
+    {
+      title: 'Horario',
+      description: [`Lunes - Viernes: ${hours.mf}`, `Sábados & Domingos: ${hours.ss}`],
+      icon: IconClock,
+    },
+  ];
+
+  return <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="max-w-6xl">
     {header && <Headline header={header} titleClass="text-3xl sm:text-5xl" />}
     <div className="flex items-stretch justify-center">
       <div className={`grid ${!content && !items ? 'md:grid-cols-1' : 'md:grid-cols-2'}`}>
@@ -40,6 +67,6 @@ const Contact = ({ header, content, items, form, id, hasBackground = false }: Co
       </div>
     </div>
   </WidgetWrapper>
-);
+};
 
 export default Contact;

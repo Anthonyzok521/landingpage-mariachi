@@ -1,9 +1,12 @@
 import Image from 'next/image';
-import { HeroProps } from '~/shared/types';
+import { HeroProps, IImage } from '~/shared/types';
 import CTA from '../common/CTA';
 import fontTitle from '~/fonts';
 
-const Hero = ({ title, subtitle, tagline, callToAction, callToAction2, image }: HeroProps) => {
+const Hero = async ({ title, subtitle, tagline, callToAction, image }: HeroProps) => {
+
+  const img = await image()
+
   return (
     <section id="heroOne">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -28,15 +31,14 @@ const Hero = ({ title, subtitle, tagline, callToAction, callToAction2, image }: 
           </div>
           {image && (
             <div className="relative m-auto max-w-5xl">
-              <Image
+              <Image                
                 className="mx-auto h-auto w-full rounded-md bg-gray-400 dark:bg-slate-700"
-                src={image.src}
-                alt={image.alt}
+                src={img.banner.src}
+                alt={img.banner.alt}
                 width={1024}
                 height={607}
                 sizes="(max-width: 64rem) 100vw, 1024px"
                 loading="eager"
-                placeholder="blur"
                 priority
               />
             </div>

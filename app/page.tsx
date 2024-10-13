@@ -19,10 +19,11 @@ export const metadata: Metadata = {
   title: SITE.title,
 };
 
-export default function Page() {
+export default async function Page() {
+  
   return (
     <>
-      <Hero {...heroHome} />
+      <Hero {...heroHome}/>
       <Features {...featuresHome} />
       <Content {...contentHomeOne} />
       <Steps {...stepsHome} />

@@ -1,19 +1,16 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { IconRss } from '@tabler/icons-react';
 import { useOnClickOutside } from '~/hooks/useOnClickOutside';
 import ToggleDarkMode from '~/components/atoms/ToggleDarkMode';
 import Link from 'next/link';
 import Logo from '~/components/atoms/Logo';
 import ToggleMenu from '../atoms/ToggleMenu';
 import { headerData } from '~/shared/data/global.data';
-import CTA from '../common/CTA';
-import { CallToActionType } from '~/shared/types';
 import { usePathname } from 'next/navigation';
 
 const Header = () => {
-  const { links, actions, isSticky, showToggleTheme, showRssFeed, position } = headerData;
+  const { links, isSticky, showToggleTheme, showRssFeed, position } = headerData;
   const pathname = usePathname();
   const ref = useRef(null);
 

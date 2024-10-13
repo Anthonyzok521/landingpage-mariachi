@@ -1,5 +1,5 @@
-import { Neonderthaw } from "next/font/google"
+import { Arizonia } from "next/font/google"
 
-const fontTitle = Neonderthaw({subsets: ['latin'], weight:'400'})
+const fontTitle = Arizonia({subsets: ['latin'], weight:'400'})
 
 export default fontTitle;

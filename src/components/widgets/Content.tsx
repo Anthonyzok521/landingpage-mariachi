@@ -1,18 +1,19 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { IconCheck } from '@tabler/icons-react';
 import { ContentProps } from '~/shared/types';
 import Headline from '../common/Headline';
 import WidgetWrapper from '../common/WidgetWrapper';
-import { type TypeLocationsMap, Locations } from "~/shared/data/pages/locations";
-import ApiMap from './Map';
-import MyMapComponent from './Map';
+import {  Locations } from "~/shared/data/pages/locations";
+
+const MyMapComponent = dynamic(() => import('./Map'), {
+    ssr: false // This ensures the component is not SSR'd
+});
 
 const Content = ({
   header,
   content,
-  items,
-  image,
   isReversed,
   isAfterContent,
   id,
@@ -30,28 +31,15 @@ const Content = ({
         <div className="self-center md:basis-1/2">
           {content && <div className="mb-8 lg:mb-12 text-lg text-gray-600 dark:text-slate-400">{content}</div>}
           <ul className=' justify-between columns-2'>
-            {Locations.map((l: TypeLocationsMap, index) => 
-              <li className='p-2 flex items-center gap-1'><IconCheck className='rounded-xl bg-blue-700 p-1 text-white'/> {l[0]}</li>
+            {Locations.map((l, index) => 
+              <li key={`l-${index}`} className='p-2 flex items-center gap-1'>
+                <IconCheck key={`ic-${index}`} className='rounded-xl bg-blue-700 p-1 text-white'/> {l[0]}</li>
             )}
           </ul>
           <h2 className='font-semibold text-xl text-center'>Y muchos más</h2>
         </div>
 
-        <div aria-hidden="true" className="mt-10 md:mt-0 md:basis-1/2">
-          {/* {image && (
-            <div className="relative m-auto max-w-4xl">
-              <Image
-                className="mx-auto w-full rounded-lg shadow-lg bg-gray-400 dark:bg-slate-700"
-                src={image.src}
-                width={828}
-                height={828}
-                alt={image.alt}
-                sizes="(max-width: 768px) 100vw, 432px"
-                placeholder="blur"
-                quality={50}
-              />
-            </div>
-          )} */}
+        <div aria-hidden="true" className="mt-10 md:mt-0 md:basis-1/2">          
           <MyMapComponent />
         </div>
       </div>

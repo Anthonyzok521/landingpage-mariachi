@@ -196,7 +196,7 @@ type HeroProps = {
   tagline?: string;
   callToAction?: CallToActionType;
   callToAction2?: CallToActionType;
-  image?: Image;
+  image?: Promise ;
 };
 
 type CallToActionProps = Widget & {
@@ -232,7 +232,7 @@ type StepsProps = Widget & {
   items: Array<Item>;
   /** Do you want the image to be displayed? */
   isImageDisplayed?: boolean;
-  image?: Image;
+  image?: Promise;
   /** Do you want to reverse the widget? */
   isReversed?: boolean;
 };
@@ -244,15 +244,12 @@ type SocialProofProps = Widget & {
 type ContactProps = Widget & {
   header?: Header;
   content?: string;
-  items?: Array<Item>;
   form: FormProps;
 };
 
 type FooterProps = {
   title?: string;
   links?: Array<Link>;
-  columns: Array<Links>;
-  socials: Array<Link>;
   footNote?: string | ReactElement;
   theme?: string;
 };
@@ -266,3 +263,21 @@ type HeaderProps = {
   showRssFeed?: boolean;
   position?: 'center' | 'right' | 'left';
 };
+
+interface IEvents {
+  title: string
+  description: string
+  image: string
+  positionImage: string
+  datetime: string
+  location: string
+}
+
+type DataEvent = Array<IEvents>;
+
+interface IImage {
+  image: {
+    src: string,
+    alt: string
+  }
+}

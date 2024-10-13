@@ -1,7 +1,3 @@
-import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-} from '@tabler/icons-react';
 import { FooterProps, HeaderProps } from '../types';
 
 // Header data
@@ -38,24 +34,6 @@ export const footerData2: FooterProps = {
       label: 'Privacy Policy',
       href: '/privacy',
     },
-  ],
-  columns: [
-    {
-      title: 'Dirección',
-      texts: ['Colombia', 'Bogotá'],
-    },
-    {
-      title: 'Teléfono',
-      texts: ['Principal: +57 302 2305738', 'Secundario: +57 310 7726932'],
-    },
-    {
-      title: 'Email',
-      texts: ['Info: contact@mariachici.com', 'Web: https://mariachici.com'],
-    },
-  ],
-  socials: [
-    { label: 'Instagram', icon: IconBrandInstagram, href: '#' },
-    { label: 'Facebook', icon: IconBrandFacebook, href: '#' },
   ],
   footNote: (
     <div className="flex gap-32 mr-4 rtl:mr-0 rtl:ml-4 text-sm">
