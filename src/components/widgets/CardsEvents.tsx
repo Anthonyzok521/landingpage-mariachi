@@ -2,7 +2,6 @@ import Image from "next/image"
 import { IEvents } from "~/shared/types"
 import { Suspense, useState } from "react";
 import { IconMapPin } from "@tabler/icons-react";
-import ImageLoader from "../common/ImageLoader";
 
 interface IE {
     events: IEvents
@@ -26,7 +25,7 @@ const CardsEvents = ({events}:IE) => {
             <span className="hidden p-2 sm:flex items-center gap-1"><IconMapPin />{events.location}</span>
         </div>
         <div className='overflow-hidden max-lg:w-full max-lg:flex max-lg:flex-col max-lg:justify-between h-full'>
-            <Suspense fallback={<ImageLoader />}>
+            <Suspense fallback={<></>}>
                 <Image loading={'lazy'} className={`rounded-bl-md max-[360px]:rounded-md ${events.positionImage} h-full object-cover`} width={650} height={340} alt={events.title} src={`${events.image}`} />
             </Suspense>
             <span className="max-lg:relative hidden p-2 max-lg:flex items-center gap-1 max-lg:justify-end text-sm"><IconMapPin className="max-lg:absolute max-lg:size-4 max-lg:left-0" />{events.location}</span>

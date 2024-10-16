@@ -13,9 +13,9 @@ const Hero = () => {
   const [image, setImage] = useState<IImage>();
   useEffect(() => {
     const getImageBanner = async () => {
-      const res = await fetch('/api/images');
+      const res = await fetch('http://localhost:3003/');
       const data = await res.json();
-
+      console.log(data)
       setImage(data);
     }
 
