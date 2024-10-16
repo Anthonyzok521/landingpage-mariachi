@@ -34,7 +34,7 @@ module.exports = {
       },
     ],
   },
-  async headers() {
+  /* async headers() {
     return [
       {
         // matching all API routes
@@ -47,5 +47,5 @@ module.exports = {
         ]
       }
     ]
-  }
+  } */
 };

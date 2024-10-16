@@ -6,14 +6,12 @@ import fontTitle from '~/fonts';
 import { Suspense, useEffect, useState } from 'react';
 import { IconPhone } from '@tabler/icons-react';
 import CTA from '../common/CTA';
-import ImageLoader from '../common/ImageLoader';
-
 
 const Hero = () => {
   const [image, setImage] = useState<IImage>();
   useEffect(() => {
     const getImageBanner = async () => {
-      const res = await fetch('http://localhost:3003/');
+      const res = await fetch('/api/images');
       const data = await res.json();
       console.log(data)
       setImage(data);
@@ -46,20 +44,16 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          <Suspense fallback={<ImageLoader />}>
-           
-              <div className="relative m-auto max-w-5xl">
-                <Image
-                  className="mx-auto h-auto w-full rounded-md bg-gray-400 dark:bg-slate-700"
-                  src={image?.src || ''}
-                  alt={'Portada'}
-                  width={1024}
-                  height={607}
-                  sizes="(max-width: 64rem) 100vw, 1024px"
-
-                />
-              </div>
-          </Suspense>
+          <div className="relative m-auto max-w-5xl max-h-[1160px] overflow-hidden">
+            <Image
+              className="mx-auto h-auto w-full object-cover origin-bottom rounded-md bg-gray-400 dark:bg-slate-700"
+              src={image?.src || ''}
+              alt={'Portada'}
+              width={1024}
+              height={607}
+              sizes="(max-width: 64rem) 100vw, 1024px"
+            />
+          </div>
         </div>
       </div>
     </section>
