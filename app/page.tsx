@@ -11,7 +11,6 @@ import {
   contactHome,
   contentHomeOne,
   featuresHome,
-  heroHome,
   stepsHome,
 } from '~/shared/data/pages/home.data';
 
@@ -23,7 +22,7 @@ export default async function Page() {
   
   return (
     <>
-      <Hero {...heroHome}/>
+      <Hero />
       <Features {...featuresHome} />
       <Content {...contentHomeOne} />
       <Steps {...stepsHome} />

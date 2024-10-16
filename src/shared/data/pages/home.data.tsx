@@ -13,7 +13,6 @@ import {
   ContactProps,
   ContentProps,
   FeaturesProps,
-  HeroProps,
   StepsProps,
 } from '../../types';
 import { ConfigCollection } from '~/utils/configCollections';
@@ -22,42 +21,6 @@ interface IDataImage {
   banner: string
   steps: string
 }
-
-// Hero data on Home page *******************
-export const heroHome: HeroProps = {
-  title: (
-    <>
-      Mariachi <span>Cocula</span> {' '}
-      <span className="sm:whitespace-nowrap">Internacional</span>
-    </>
-  ),
-  subtitle: (
-    <>
-      La mejor opción para tus fiestas y eventos.
-      Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo.
-    </>
-  ),
-  callToAction: {
-    text: '¡Contratar ahora!',
-    href: 'https://api.whatsapp.com/send?phone=+573022305738&text=Hola!',
-    icon: IconPhone,
-    targetBlank: true,
-  },
-  callToAction2: {
-    text: 'Learn more',
-    href: '/',
-  },
-  image: async () => {
-    const result = await ConfigCollection.getImages()
-    const i = Object.values(result) as Array<any>
-    const data = i[2].images as IDataImage;
-    const image = {
-      banner: { src: data.banner, alt: 'Portada' }
-    };
-
-    return image;
-  }
-};
 
 // Features data on Home page *******************
 export const featuresHome: FeaturesProps = {

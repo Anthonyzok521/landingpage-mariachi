@@ -196,7 +196,6 @@ type HeroProps = {
   tagline?: string;
   callToAction?: CallToActionType;
   callToAction2?: CallToActionType;
-  image?: Promise ;
 };
 
 type CallToActionProps = Widget & {
@@ -276,8 +275,6 @@ interface IEvents {
 type DataEvent = Array<IEvents>;
 
 interface IImage {
-  image: {
-    src: string,
-    alt: string
-  }
+  src: string,
+  alt: string
 }

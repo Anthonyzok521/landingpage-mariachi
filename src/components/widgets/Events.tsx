@@ -1,8 +1,8 @@
 'use client';
 import { IconFilter, IconSearch } from "@tabler/icons-react"
-import { DataEvent, IEvents } from "~/shared/types"
+import { DataEvent } from "~/shared/types"
 import { lazy, Suspense, useState } from "react";
-import { CardsEventsSkeleton } from "./CardsEventsSkeleton";
+import CardsEventsSkeleton from "./CardsEventsSkeleton";
 import { Locations } from "~/shared/data/pages/locations";
 
 const CardsEvents = lazy(() => import("./CardsEvents"));
@@ -87,8 +87,8 @@ export const Events = ({ dataEvents }: IData) => {
             </form>
         </header>
         <div className="grid grid-cols-1 gap-6  p-4 md:p-0 lg:grid-cols-2">
-            {filter.map(({ title, description, image, positionImage, datetime, location }: IEvents, index) => <Suspense key={`sss-${index}`} fallback={<CardsEventsSkeleton />}>
-                <CardsEvents title={title} description={description} image={image} positionImage={positionImage} datetime={datetime} location={location} key={index} />
+            {filter.map((event, index) => <Suspense key={`sss-${index}`} fallback={<CardsEventsSkeleton />}>
+                <CardsEvents events={event} key={index} />
             </Suspense>
             )}
         </div>
