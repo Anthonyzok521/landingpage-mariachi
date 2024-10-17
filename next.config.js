@@ -22,6 +22,10 @@ module.exports = {
       },
       {
         protocol: 'https',
+        hostname: 'placehold.jp',
+      },
+      {
+        protocol: 'https',
         hostname: 'cdn.mariachici.com',
         port: '',
         pathname: '/images/**',

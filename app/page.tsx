@@ -8,10 +8,8 @@ import Content from '~/components/widgets/Content';
 import Steps from '~/components/widgets/Steps';
 import Contact from '~/components/widgets/Contact';
 import {
-  contactHome,
   contentHomeOne,
   featuresHome,
-  stepsHome,
 } from '~/shared/data/pages/home.data';
 
 export const metadata: Metadata = {
@@ -25,8 +23,8 @@ export default async function Page() {
       <Hero />
       <Features {...featuresHome} />
       <Content {...contentHomeOne} />
-      <Steps {...stepsHome} />
-      <Contact {...contactHome} />
+      <Steps />
+      <Contact />
     </>
   );
 }

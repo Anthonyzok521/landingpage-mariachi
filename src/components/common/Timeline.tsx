@@ -1,3 +1,4 @@
+'use client'
 import { twMerge } from 'tailwind-merge';
 import { Timeline as TimelineType } from '~/shared/types';
 

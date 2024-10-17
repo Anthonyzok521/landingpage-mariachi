@@ -98,7 +98,6 @@ type FormProps = {
   radioBtns?: RadioBtn;
   textarea?: Textarea;
   checkboxes?: Array<Checkbox>;
-  btn: Button;
   btnPosition?: 'center' | 'right' | 'left';
   containerClass?: string;
 };
@@ -218,7 +217,6 @@ type FeaturesProps = Widget & {
 };
 
 type ContentProps = Widget & {
-  header?: Header;
   content?: string;
   items?: Array<Item>;
   image?: Image;
@@ -231,7 +229,6 @@ type StepsProps = Widget & {
   items: Array<Item>;
   /** Do you want the image to be displayed? */
   isImageDisplayed?: boolean;
-  image?: Promise;
   /** Do you want to reverse the widget? */
   isReversed?: boolean;
 };
@@ -243,7 +240,6 @@ type SocialProofProps = Widget & {
 type ContactProps = Widget & {
   header?: Header;
   content?: string;
-  form: FormProps;
 };
 
 type FooterProps = {

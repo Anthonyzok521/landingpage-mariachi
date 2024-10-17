@@ -4,21 +4,18 @@ import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { FormProps } from '../../shared/types';
 
-const Form = ({
-  title,
-  description,
-  inputs,
-  radioBtns,
-  textarea,
-  checkboxes,
-  btn,
-  btnPosition,
-  containerClass,
-}: FormProps) => {
+interface IForm {
+  form: FormProps
+  btnPosition: string
+  className?: string
+}
+
+const Form = ({form, btnPosition, className}: IForm) => {
+
   const [inputValues, setInputValues] = useState([]);
   const [radioBtnValue, setRadioBtnValue] = useState('');
   const [textareaValues, setTextareaValues] = useState('');
-  const [checkedState, setCheckedState] = useState<boolean[]>(new Array(checkboxes && checkboxes.length).fill(false));
+  const [checkedState, setCheckedState] = useState<boolean[]>(new Array(form.checkboxes && form.checkboxes.length).fill(false));
 
   // Update the value of the entry fields
   const changeInputValueHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,14 +49,14 @@ const Form = ({
   };
 
   return (
-    <form id="contactForm" className={twMerge('', containerClass)}>
-      {title && <h2 className={`${description ? 'mb-2' : 'mb-4'} text-2xl font-bold`}>{title}</h2>}
-      {description && <p className="mb-4">{description}</p>}
+    <form id="contactForm" className={twMerge('', className)}>
+      {form.title && <h2 className={`${form.description ? 'mb-2' : 'mb-4'} text-2xl font-bold`}>{form.title}</h2>}
+      {form.description && <p className="mb-4">{form.description}</p>}
       <div className="mb-6">
         {/* Inputs */}
         <div className="mx-0 mb-1 sm:mb-4">
-          {inputs &&
-            inputs.map(({ type, label, name, autocomplete, placeholder }, index) => (
+          {form.inputs &&
+            form.inputs.map(({ type, label, name, autocomplete, placeholder }, index) => (
               <div key={`item-input-${index}`} className="mx-0 mb-1 sm:mb-4">
                 <label htmlFor={name} className="pb-1 text-xs uppercase tracking-wider">
                   {label}
@@ -78,11 +75,11 @@ const Form = ({
             ))}
         </div>
         {/* Radio buttons */}
-        {radioBtns && (
+        {form.radioBtns && (
           <div className="mx-0 mb-1 sm:mb-3">
-            <span className="pb-1 text-xs uppercase tracking-wider">{radioBtns?.label}</span>
+            <span className="pb-1 text-xs uppercase tracking-wider">{form.radioBtns?.label}</span>
             <div className="flex flex-wrap">
-              {radioBtns.radios.map(({ label }, index) => (
+              {form.radioBtns.radios.map(({ label }, index) => (
                 <div key={`radio-btn-${index}`} className="mr-4 items-baseline">
                   <input
                     id={label}
@@ -102,27 +99,27 @@ const Form = ({
           </div>
         )}
         {/* Textarea */}
-        {textarea && (
+        {form.textarea && (
           <div className={`mx-0 mb-1 sm:mb-4`}>
-            <label htmlFor={textarea.name} className="pb-1 text-xs uppercase tracking-wider">
-              {textarea.label}
+            <label htmlFor={form.textarea.name} className="pb-1 text-xs uppercase tracking-wider">
+              {form.textarea.label}
             </label>
             <textarea
-              id={textarea.name}
-              name={textarea.name}
-              cols={textarea.cols}
-              rows={textarea.rows}
+              id={form.textarea.name}
+              name={form.textarea.name}
+              cols={form.textarea.cols}
+              rows={form.textarea.rows}
               value={textareaValues}
               onChange={(e) => changeTextareaHandler(e)}
-              placeholder={textarea.placeholder}
+              placeholder={form.textarea.placeholder}
               className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
             />
           </div>
         )}
         {/* Checkboxes */}
-        {checkboxes && (
+        {form.checkboxes && (
           <div className="mx-0 mb-1 sm:mb-4">
-            {checkboxes.map(({ label }, index) => (
+            {form.checkboxes.map(({ label }, index) => (
               <div key={`checkbox-${index}`} className="mx-0 my-1 flex items-baseline">
                 <input
                   id={label}
@@ -140,15 +137,13 @@ const Form = ({
           </div>
         )}
       </div>
-      {btn && (
         <div
           className={`${btnPosition === 'left' ? 'text-left' : btnPosition === 'right' ? 'text-right' : 'text-center'}`}
         >
-          <button type={btn.type || 'button'} className="btn btn-primary sm:mb-0">
-            {btn.title}
+          <button type='button' className="btn btn-primary sm:mb-0">
+            Enviar
           </button>
         </div>
-      )}
     </form>
   );
 };

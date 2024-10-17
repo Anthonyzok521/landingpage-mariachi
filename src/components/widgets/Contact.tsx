@@ -1,11 +1,42 @@
 import Form from '../common/Form';
 import Headline from '../common/Headline';
-import { ContactProps } from '~/shared/types';
 import WidgetWrapper from '../common/WidgetWrapper';
 import { IconClock, IconMapPin, IconPhoneCall } from '@tabler/icons-react';
 import { ConfigCollection } from '~/utils/configCollections';
 
-const Contact = async ({ header, content, form, id, hasBackground = false }: ContactProps) => {
+const form = {
+  title: 'Enviar un correo',
+  inputs: [
+    {
+      type: 'text',
+      name: 'name',
+      autocomplete: 'off',
+      placeholder: 'Tu nombre',
+    },
+    {
+      type: 'email',
+      name: 'email',
+      autocomplete: 'on',
+      placeholder: 'Tu correo electrónico',
+    },
+  ],
+  textarea: {
+    cols: 30,
+    rows: 5,
+    name: 'textarea',
+    placeholder: 'Dinos tu mensaje...',
+  },
+};
+
+const content = 'Mariachi Cocula Internacional es la mejor opción para tus fiestas y eventos. Acompañamos a grandes artistas y tenemos el mejor repertorio para tu espectáculo.';
+
+const header = {
+  title: 'No esperes más y contáctanos',
+  subtitle: 'Envíanos un correo',
+  tagline: 'Contacto',
+}
+
+const Contact = async () => {
   const c = await ConfigCollection.getContacts();
   const cc = Object.values(c)[2] as any;
   const contacts = cc.contacts
@@ -31,7 +62,7 @@ const Contact = async ({ header, content, form, id, hasBackground = false }: Con
     },
   ];
 
-  return <WidgetWrapper id={id ? id : ''} hasBackground={hasBackground} containerClass="max-w-6xl">
+  return <WidgetWrapper id={'Contacts'} hasBackground={true} containerClass="max-w-6xl">
     {header && <Headline header={header} titleClass="text-3xl sm:text-5xl" />}
     <div className="flex items-stretch justify-center">
       <div className={`grid ${!content && !items ? 'md:grid-cols-1' : 'md:grid-cols-2'}`}>
@@ -63,7 +94,7 @@ const Contact = async ({ header, content, form, id, hasBackground = false }: Con
               ))}
           </ul>
         </div>
-        <Form {...form} containerClass="card h-fit max-w-2xl mx-auto p-5 md:p-12" btnPosition="center" />
+        <Form form={form} className="card h-fit max-w-2xl mx-auto p-5 md:p-12" btnPosition="center" />
       </div>
     </div>
   </WidgetWrapper>

@@ -5,7 +5,10 @@ export const GET = async () => {
     const result = await ConfigCollection.getImages()
     const i = Object.values(result) as Array<any>
     const data = i[2].images;
-    const image = { src: data.banner, alt: 'Portada' }
-
-    return NextResponse.json(image)
+    const images = {
+        banner: { src: data.banner, alt: 'Portada'},
+        steps: { src: data.steps, alt: 'Steps' },
+    }
+    
+return NextResponse.json(images)
 }

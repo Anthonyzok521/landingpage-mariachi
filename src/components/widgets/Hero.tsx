@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { IImage } from '~/shared/types';
 
 import fontTitle from '~/fonts';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconPhone } from '@tabler/icons-react';
 import CTA from '../common/CTA';
 
@@ -13,8 +13,7 @@ const Hero = () => {
     const getImageBanner = async () => {
       const res = await fetch('/api/images');
       const data = await res.json();
-      console.log(data)
-      setImage(data);
+      setImage(data.banner);
     }
 
     getImageBanner();
@@ -47,7 +46,7 @@ const Hero = () => {
           <div className="relative m-auto max-w-5xl max-h-[1160px] overflow-hidden">
             <Image
               className="mx-auto h-auto w-full object-cover origin-bottom rounded-md bg-gray-400 dark:bg-slate-700"
-              src={image?.src || ''}
+              src={image?.src || 'https://placehold.jp/1200x600.png'}
               alt={'Portada'}
               width={1024}
               height={607}

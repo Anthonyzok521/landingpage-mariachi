@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image"
 import { IEvents } from "~/shared/types"
 import { Suspense, useState } from "react";
