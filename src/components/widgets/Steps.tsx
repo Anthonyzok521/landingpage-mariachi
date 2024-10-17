@@ -29,7 +29,7 @@ const items = [
     icon: IconArrowDown,
   },
   {
-    title: 'Contratados',
+    title: 'Contratar',
   },
 ];
 
@@ -37,7 +37,11 @@ const Steps = () => {
   const [image, setImage] = useState<IImage>();
   useEffect(() => {
     const getImageSteps = async () => {
-      const res = await fetch('/api/images');
+      const res = await fetch('/api/images', {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate'
+        }
+      });
       const data = await res.json();
       console.log(data)
       setImage(data.steps);
@@ -73,7 +77,6 @@ const Steps = () => {
             width={400}
             height={768}
             alt={image?.alt}
-            /* placeholder="blur" */
             className="inset-0 object-cover object-top w-full rounded-md shadow-lg md:absolute md:h-full bg-gray-400 dark:bg-slate-700"
             quality={50}
           />

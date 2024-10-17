@@ -11,7 +11,11 @@ const Hero = () => {
   const [image, setImage] = useState<IImage>();
   useEffect(() => {
     const getImageBanner = async () => {
-      const res = await fetch('/api/images');
+      const res = await fetch('/api/images', {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate'
+        }
+      });
       const data = await res.json();
       setImage(data.banner);
     }
@@ -51,6 +55,7 @@ const Hero = () => {
               width={1024}
               height={607}
               sizes="(max-width: 64rem) 100vw, 1024px"
+              quality={50}
             />
           </div>
         </div>
