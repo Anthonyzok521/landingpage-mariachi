@@ -6,7 +6,6 @@ module.exports = {
   reactStrictMode: true,
 
   trailingSlash: SITE.trailingSlash,
-  basePath: SITE.basePathname !== '/' ? SITE.basePathname : '',
 
   swcMinify: true,
   poweredByHeader: false,
@@ -29,6 +28,12 @@ module.exports = {
         hostname: 'cdn.mariachici.com',
         port: '',
         pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.mariachici.com',
+        port: '',
+        pathname: '/videos/**',
       },
       {
         protocol: 'https',

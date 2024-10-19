@@ -1,11 +1,35 @@
 'use client'
+import { IconArrowDown, IconCheck } from '@tabler/icons-react';
 import { twMerge } from 'tailwind-merge';
 import { Timeline as TimelineType } from '~/shared/types';
 
+// Steps data on Home page *******************
+const items = [
+  {
+    title: 'Con alegría',
+    description:
+      'Serenatas de 7 canciones mas la ñapa y un recordatorio.',
+    icon: IconArrowDown,
+  },
+  {
+    title: 'Responsabilidad',
+    description:
+      'Mariachi Desde 5 integrantes en Adelante ajustado a su presupuesto.',
+    icon: IconArrowDown,
+  },
+  {
+    title: 'Calidad',
+    description:
+      'Somos la mejor opción en cuanto a calidad y precio se refiere',
+    icon: IconArrowDown,
+  },
+  {
+    title: 'Contratar',
+  },
+];
+
 const Timeline = ({
   id,
-  items,
-  defaultIcon: DefaultIcon,
   containerClass,
   panelClass,
   iconClass,
@@ -26,8 +50,8 @@ const Timeline = ({
                 >
                   {Icon ? (
                     <Icon className={twMerge('w-10 h-10 p-2 rounded-full border-2', iconClass)} />
-                  ) : DefaultIcon ? (
-                    <DefaultIcon className={twMerge('w-10 h-10 p-2 rounded-full border-2', iconClass)} />
+                  ) : true ? (
+                    <IconCheck className={twMerge('w-10 h-10 p-2 rounded-full border-2', iconClass)} />
                   ) : null}
                 </div>
 

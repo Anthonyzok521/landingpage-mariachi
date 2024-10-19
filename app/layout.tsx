@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   description: SITE.description,
 };
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="es" className={`motion-safe:scroll-smooth 2xl:text-[24px] ${customFont.variable} font-sans`}>

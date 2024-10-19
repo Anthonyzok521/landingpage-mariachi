@@ -259,7 +259,7 @@ type HeaderProps = {
   position?: 'center' | 'right' | 'left';
 };
 
-interface IEvents {
+type IEvents = {
   title: string
   description: string
   image: string
@@ -270,7 +270,14 @@ interface IEvents {
 
 type DataEvent = Array<IEvents>;
 
-interface IImage {
-  src: string,
-  alt: string
+type IImage = {
+  images: {
+    banner?:string
+    steps?:string
+  }
+}
+
+type Gallery = {
+  title: string
+  image: string
 }
