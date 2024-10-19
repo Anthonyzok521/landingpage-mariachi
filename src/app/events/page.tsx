@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Events } from '~/components/widgets/Events';
-import * as api from 'app/api/index'
+import * as api from '../api'
 
 export const metadata: Metadata = {
   title: 'Eventos',

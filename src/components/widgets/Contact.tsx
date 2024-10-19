@@ -2,7 +2,7 @@ import Form from '../common/Form';
 import Headline from '../common/Headline';
 import WidgetWrapper from '../common/WidgetWrapper';
 import { IconClock, IconMapPin, IconPhoneCall } from '@tabler/icons-react';
-import * as api from 'app/api/index'
+import * as api from '~/app/api'
 
 const form = {
   title: 'Enviar un correo',

@@ -1,6 +1,6 @@
 import { IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 import { footerData2 } from '~/shared/data/global.data';
-import * as api from 'app/api/index'
+import * as api from '~/app/api'
 
 const Footer2 = async () => {
   const data = await api.getConfigs()

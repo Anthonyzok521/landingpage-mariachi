@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Gallery } from "~/shared/types";
-import * as api from "app/api/index"
+import * as api from '../api'
 
 export default async function Home({ }) {
   const gallery = await api.getImagesFromGallery()

@@ -11,7 +11,7 @@ import {
   contentHomeOne,
   featuresHome,
 } from '~/shared/data/pages/home.data';
-import * as api from 'app/api/index';
+import * as api from './api';
 
 
 export const metadata: Metadata = {
