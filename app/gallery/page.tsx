@@ -4,7 +4,7 @@ import * as api from "app/api/index"
 
 export default async function Home({ }) {
   const gallery = await api.getImagesFromGallery()
-  console.log(gallery)
+
   return <>
     <h1 className="leading-tighter font-heading mb-8 text-center text-4xl font-bold tracking-tighter md:mb-16 md:text-5xl">
       Galería
