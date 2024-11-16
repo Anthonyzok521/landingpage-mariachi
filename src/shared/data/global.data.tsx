@@ -2,6 +2,7 @@ import { FooterProps, HeaderProps } from '../types';
 
 // Header data
 export const headerData: HeaderProps = {
+
   links: [        
     {
       label: 'Inicio',
@@ -14,7 +15,7 @@ export const headerData: HeaderProps = {
     {
       label: 'Galería',
       href: '/gallery',
-    },
+    },    
   ],  
   isSticky: true,
   showToggleTheme: true,

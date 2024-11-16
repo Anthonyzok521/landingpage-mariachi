@@ -11,7 +11,7 @@ export default async function Home() {
   const dataEvents = await api.getEvents();
 
   return <section className="mx-auto max-w-3xl px-6 py-12 sm:px-6 sm:py-16 lg:py-20">
-    <Events {...dataEvents}/>
+    <Events dataEvents={dataEvents}/>
   </section>
 
 }

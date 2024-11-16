@@ -37,7 +37,7 @@ type Icon = TablerIcon;
 
 type CallToActionType = {
   text?: string;
-  href: string;
+  href?: string;
   icon?: Icon;
   targetBlank?: boolean;
 };
@@ -47,6 +47,8 @@ type LinkOrButton = {
   containerClass?: string;
   linkClass?: string;
   iconClass?: string;
+  action?: Boolean;
+  onClickHandle?: () => void;
 };
 
 type Button = {
@@ -259,6 +261,16 @@ type HeaderProps = {
   position?: 'center' | 'right' | 'left';
 };
 
+type MusicEvent = {
+  _id: string
+  name: string
+  description: string
+  fullDescription: string
+  date: Date
+  city: string
+  imageUrl: string
+}
+/* 
 type IEvents = {
   title: string
   description: string
@@ -266,9 +278,9 @@ type IEvents = {
   positionImage: string
   datetime: string
   location: string
-}
+} */
 
-type DataEvent = Array<IEvents>;
+//type DataEvent = Array<IEvents>;
 
 type IImage = {
   images: {
@@ -277,7 +289,38 @@ type IImage = {
   }
 }
 
-type Gallery = {
+type IGallery = {
+  _id: string
   title: string
-  image: string
+  path: string
+  type: string
+}
+
+type IAuth = {
+  auth: boolean
+}
+
+type Configs = {
+  contacts: {
+        phone: {
+            primary: string,
+            secondary: string,
+        },
+        email: string,
+        social: {
+            instagram: string,
+            facebook: string,
+            tiktok: string,
+            maps: string,
+            x: string,
+        }
+    },
+    hours: {
+        mf: string,
+        ss: string 
+    },
+    images: {
+        banner: string,
+        steps: string
+    },
 }

@@ -4,6 +4,7 @@ import * as api from '~/app/api'
 
 const Footer2 = async () => {
   const data = await api.getConfigs()
+  console.log(data);
   const contacts = data[0].contacts;
   
   const { links, footNote } = footerData2;

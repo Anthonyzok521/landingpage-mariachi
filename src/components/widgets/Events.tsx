@@ -1,18 +1,18 @@
 'use client';
 import { IconFilter, IconSearch } from "@tabler/icons-react"
-import { DataEvent, IEvents } from "~/shared/types"
 import { lazy, Suspense, useEffect, useState } from "react";
 import CardsEventsSkeleton from "./CardsEventsSkeleton";
 import { Locations } from "~/shared/data/pages/locations";
+import { MusicEvent } from "~/shared/types";
 
 const CardsEvents = lazy(() => import("./CardsEvents"));
 
-interface IData {
-    dataEvent: DataEvent
+interface IEventes {
+    dataEvents: MusicEvent[]
 }
 
-export const Events = (dataEvents: IEvents[]) => {
-    const [dataEvent, setDataEvent] = useState(Object.values(dataEvents).reverse())
+export const Events = ({ dataEvents }: IEventes) => {
+    const [dataEvent, setDataEvent] = useState(dataEvents.reverse())
     const [filter, setFilter] = useState(dataEvent)
     const [open, setOpen] = useState<boolean>(false);
     const [search, setSearch] = useState<string>()
@@ -21,7 +21,7 @@ export const Events = (dataEvents: IEvents[]) => {
     const [location, setLocation] = useState<string>("-- - --")
 
     const filterSearch = () => {
-        const f = search ? dataEvent.filter(({ title }) => title.includes(`${search}`)) : dataEvent.reverse()
+        const f = search ? dataEvent.filter(({ name }) => name.includes(`${search}`)) : dataEvent.reverse()
         setFilter(f);
     }
 
@@ -30,35 +30,35 @@ export const Events = (dataEvents: IEvents[]) => {
         const [year, month, day] = dateString.split('-')
         return `${day}/${month}/${year}`
     }
-    
-    const filterDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    /* const filterDate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDate(event.target.value)
         const d = formatDate(event.target.value as string)
-        const f = d ? dataEvent.filter(({ datetime }) => datetime.includes(d) || datetime.includes(`/${event.target.value.substring(5, 7)}/`)) : dataEvent.reverse()
+        const f = d ? dataEvent.filter(({ date }) => date.includes(d) || date.includes(`/${event.target.value.substring(5, 7)}/`)) : dataEvent.reverse()
         setFilter(f);
-    }
+    } */
 
-    const filterTime = (event: React.ChangeEvent<HTMLInputElement>) => {
+    /* const filterTime = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTime(event.target.value)
-        const f = time ? dataEvent.filter(({ datetime }) => datetime.includes(`- ${event.target.value}`) || datetime.includes(`- ${event.target.value.substring(0, 3)}`)) : dataEvent.reverse()
+        const f = time ? dataEvent.filter(({ date }) => date.includes(`- ${event.target.value}`) || date.includes(`- ${event.target.value.substring(0, 3)}`)) : dataEvent.reverse()
         setFilter(f);
-    }
-    
+    } */
+
     const filterLocation = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setLocation(event.target.value)
-        const f = location ? dataEvent.filter(({ location }) => location.includes(`${event.target.value}`)) : dataEvent.reverse()
+        const f = location ? dataEvent.filter(({ city }) => city.includes(`${event.target.value}`)) : dataEvent.reverse()
         setFilter(f);
     }
-    
-    useEffect(() => {
-        
-        const getData = async () => {
-            const res = await fetch('/api/events', {cache: 'no-store'});
-            const data = await res.json()
 
+    useEffect(() => {
+
+        const getData = async () => {
+            const res = await fetch('/api/events', { cache: 'no-store' });
+            const data = await res.json()
+            
             setFilter(data)
         }
-        
+
         getData();
     }, [])
 
@@ -82,12 +82,12 @@ export const Events = (dataEvents: IEvents[]) => {
                     </div>
                     {open &&
                         <div className="flex gap-2 max-lg:flex-col justify-between w-full">
-                            <label className="flex justify-between items-center">Buscar por fecha:
+                            {/* <label className="flex justify-between items-center">Buscar por fecha:
                                 <input className="p-1 rounded-md" type="date" value={date} onChange={filterDate} />
                             </label>
                             <label className="flex justify-between items-center">Buscar por hora:
                                 <input className="p-1 rounded-md" type="time" value={time} onChange={filterTime} />
-                            </label>
+                            </label> */}
                             <label className="flex justify-between items-center">Buscar por ciudad:
                                 <select className="p-1 rounded-md" name="location" value={location} onChange={filterLocation}>
                                     <option value={'-- - --'}>-- - --</option>
@@ -99,11 +99,10 @@ export const Events = (dataEvents: IEvents[]) => {
                 </div>
             </form>
         </header>
-        <div className="grid grid-cols-1 gap-6  p-4 md:p-0 lg:grid-cols-2">
-            {filter.map((event, index) => <Suspense key={`sss-${index}`} fallback={<CardsEventsSkeleton />}>
-                <CardsEvents events={event} key={index} />
-            </Suspense>
-            )}
-        </div>
+        <Suspense fallback={<CardsEventsSkeleton />}>
+            <CardsEvents events={dataEvents} />
+        </Suspense>
+        {/* <div className="grid grid-cols-1 gap-6  p-4 md:p-0 lg:grid-cols-2">
+        </div> */}
     </>
 }

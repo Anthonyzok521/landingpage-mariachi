@@ -1,6 +1,8 @@
 'use client';
 
 import { ThemeProvider } from 'next-themes';
+import { Provider } from 'react-redux';
+import store from '~/lib/store';
 
 
 export interface ProvidersProps {
@@ -12,7 +14,9 @@ export const revalidate = 0;
 
 const Providers = ({ children }: ProvidersProps) => (
   <ThemeProvider attribute="class" disableTransitionOnChange>
-    {children}
+    <Provider store={store}>
+      {children}
+    </Provider>
   </ThemeProvider>
 );
 

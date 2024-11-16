@@ -9,7 +9,16 @@ import ToggleMenu from '../atoms/ToggleMenu';
 import { headerData } from '~/shared/data/global.data';
 import { usePathname } from 'next/navigation';
 
-const Header = () => {
+type Props = {
+  login: boolean
+};
+
+const adminLink = [{
+  label: 'Administrar',
+  href: '/admin',
+}];
+
+const Header = ({login}: Props) => {
   const { links, isSticky, showToggleTheme, showRssFeed, position } = headerData;
   const pathname = usePathname();
   const ref = useRef(null);
@@ -102,7 +111,20 @@ const Header = () => {
                       {label}
                     </Link>
                 </li>
+              )) }
+
+              {login && adminLink.map(({ label, href }, index) => (
+                <li key={`item-link-${index}`} className={links?.length ? 'dropdown' : ''}>                  
+                    <Link
+                      className={`${href == pathname || pathname.includes('admin') ? 'text-yellow-400' : ''} flex items-center px-4 py-3 font-medium transition duration-150 ease-in-out hover:text-yellow-400 dark:hover:text-white`}
+                      href={href as string}
+                      onClick={() => (isToggleMenuOpen ? handleToggleMenuOnClick() : handleDropdownOnClick(index))}
+                    >
+                      {label}
+                    </Link>
+                </li>
               ))}
+              
           </ul>
         </nav>
         <div

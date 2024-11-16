@@ -27,7 +27,7 @@ module.exports = {
         protocol: 'https',
         hostname: 'cdn.mariachici.com',
         port: '',
-        pathname: '/images/**',
+        pathname: '/media/**',
       },
       {
         protocol: 'https',
@@ -37,9 +37,21 @@ module.exports = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn.mariachici.com',
+        port: '',
+        pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'opengraph.b-cdn.net',
         port: '',
         pathname: '/production/images/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'http://192.168.0.6',
+        port: '3000',
+        pathname: '/api/**',
       },
     ],
   },

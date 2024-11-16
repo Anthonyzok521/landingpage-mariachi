@@ -12,3 +12,8 @@ export const getImagesFromGallery = async () => {
     const res = await fetch('http://localhost:3000/api/gallery', {next: {revalidate: 0}});
     return await res.json();
 }
+
+export const getAuthLogin = async () => {
+    const res = await fetch('http://localhost:3000/api/auth', {next: {revalidate: 0}});
+    return await res.json();
+}
