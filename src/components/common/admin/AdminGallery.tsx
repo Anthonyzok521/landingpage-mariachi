@@ -7,15 +7,21 @@ import { Label } from "~/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
 import { AlertCircle, FileUp } from 'lucide-react'
 import Link from 'next/link'
-import { IconArrowBack } from '@tabler/icons-react'
+import { IconArrowBack, IconCheck } from '@tabler/icons-react'
 import Gallery from '../Gallery'
 import * as api from '../../../app/api'
 import { IGallery } from '~/shared/types'
+import { Dialog, DialogContent } from '~/components/ui/dialog'
+import { useRouter } from 'next/navigation'
 
 export const AdminGallery = () => {
-  const [file, setFile] = useState<File | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const [images, setImages] = useState<IGallery[]>([{_id: '', path: '', title: '', type: '' }]);
+  const [file, setFile] = useState<File | null>(null);
+  const [open, setOpen] = useState<Boolean>();
+  const [error, setError] = useState<string | null>(null);
+  const [images, setImages] = useState<IGallery[]>([{ _id: '', path: '', title: '', type: '' }]);
+  const [type, setType] = useState<string>();
+  const [title, setTitle] = useState<string>();
+  const navigation = useRouter();
 
   const allowedTypes = ['.jpg', '.jpeg', '.png', '.mp4', '.ogg']
 
@@ -23,6 +29,10 @@ export const AdminGallery = () => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0]
       const fileExtension = '.' + selectedFile.name.split('.').pop()?.toLowerCase()
+      setTitle(selectedFile.name);
+      setType(
+        fileExtension in ['.mp4', '.ogg'] ? 'video' : 'image'
+      );
 
       if (allowedTypes.includes(fileExtension)) {
         setFile(selectedFile)
@@ -41,11 +51,17 @@ export const AdminGallery = () => {
       return
     }
 
-    // Aquí iría la lógica para enviar el archivo al servidor
-    console.log('Archivo listo para ser enviado:', file)
+    const data = new FormData();
+    data.append('file', file);
+    data.append('title', `${title?.toString()}`);
+    data.append('type', `${type?.toString()}`);
 
-    // Simulamos una carga exitosa
-    alert('Archivo cargado con éxito!')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery/create`, {
+      method: 'POST',
+      body: data,
+    })
+
+    setOpen(true);
     setFile(null)
   }
 
@@ -57,7 +73,7 @@ export const AdminGallery = () => {
     get();
   }, [])
 
-  return <>    
+  return <>
     <section className="flex flex-col justify-center">
       <div className="w-full justify-between">
         <nav className="w-full">
@@ -70,12 +86,12 @@ export const AdminGallery = () => {
           </ul>
         </nav>
       </div>
-      
-      <div className='overflow-y-auto h-96 w-full scale-75'>
-      <Gallery mediaItems={images} isAdmin={true}/>
-    </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto p-6 bg-card rounded-lg shadow-md">
+      <div className='overflow-y-auto h-96 w-full scale-75'>
+        <Gallery mediaItems={images} isAdmin={true} />
+      </div>
+
+      <form onSubmit={handleSubmit}  method="POST" className="space-y-6 max-w-md mx-auto p-6 bg-card rounded-lg shadow-md">
         <div>
           <Label htmlFor="file-upload" className="block text-sm font-medium mb-2">
             Selecciona una imagen o video
@@ -87,6 +103,8 @@ export const AdminGallery = () => {
             accept={allowedTypes.join(',')}
             className="file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
           />
+          <input name='title' type='hidden' value={title} />
+          <input name='type' type='hidden' value={type} />
         </div>
 
         {error && (
@@ -107,6 +125,17 @@ export const AdminGallery = () => {
           <FileUp className="mr-2 h-4 w-4" /> Subir Archivo
         </Button>
       </form>
+      <Dialog open={!!open} onOpenChange={() => {
+        setOpen(false);
+        navigation.refresh();
+        }}>
+        <DialogContent className="max-w-80 bg-neutral-100 dark:bg-neutral-900 flex flex-col justify-center items-center">
+
+          <IconCheck className="text-green-500" />
+          <h1>Imagen subida a la galería</h1>
+
+        </DialogContent>
+      </Dialog>
     </section>
   </>
 

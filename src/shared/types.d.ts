@@ -308,6 +308,7 @@ type ILogin = {
 }
 
 type Configs = {
+  _id: string,
   contacts: {
         phone: {
             primary: string,

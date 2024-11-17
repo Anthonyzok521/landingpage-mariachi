@@ -1,5 +1,5 @@
 'use client';
-import { IconArrowBack, IconCalendar, IconDatabaseEdit, IconImageInPicture, IconMapRoute, IconTextCaption, IconTextGrammar } from "@tabler/icons-react";
+import { IconArrowBack, IconCalendar, IconCheck, IconDatabaseEdit, IconExclamationCircleFilled, IconImageInPicture, IconMapRoute, IconTextCaption, IconTextGrammar } from "@tabler/icons-react";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import CardsEvents from "~/components/widgets/CardsEvents";
@@ -8,14 +8,17 @@ import { IGallery, MusicEvent } from "~/shared/types";
 import CTA from "../CTA";
 import Gallery from "../Gallery";
 import { useSelector } from "react-redux";
+import { Dialog, DialogContent } from "~/components/ui/dialog";
 
 export const AdminEvents = () => {
 
     const [events, setEvents] = useState<MusicEvent[]>([]);
     const [images, setImages] = useState<IGallery[]>([]);
+    const [open, setOpen] = useState<Boolean>();
+    const [empty, setEmpty] = useState<Boolean>();
     const imagePath = useSelector((state: any) => state.image.path);
 
-    useEffect(()=>{
+    useEffect(() => {
         const get = async () => {
             const dataEvents = await api.getEvents();
             setEvents(dataEvents);
@@ -33,17 +36,28 @@ export const AdminEvents = () => {
         const fullDescription = document.querySelector("#fullDescription") as HTMLInputElement;
         const date = document.querySelector("#date") as HTMLInputElement;
         const city = document.querySelector("#city") as HTMLInputElement;
-        const imageUrl = document.querySelector("#imageUrl") as HTMLInputElement;        
+        const imageUrl = document.querySelector("#imageUrl") as HTMLInputElement;
 
-        await fetch('',{
+        if (!name.value ||
+            !description.value ||
+            !fullDescription.value ||
+            !date.value ||
+            !city.value ||
+            !imageUrl.value) {
+            setEmpty(true);
+            setOpen(true);
+            return;
+        }
+
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/create`, {
             method: 'POST',
             body: JSON.stringify({
-                name:name.value,
-                description:description.value,
-                fullDescription:fullDescription.value,
-                date:date.value,
-                city:city.value,
-                imageUrl:imageUrl.value
+                name: name.value,
+                description: description.value,
+                fullDescription: fullDescription.value,
+                date: date.value,
+                city: city.value,
+                imageUrl: imageUrl.value
             })
         })
     }
@@ -70,7 +84,7 @@ export const AdminEvents = () => {
             <form onSubmit={handleSubmit} className="border-2 p-2 rounded-md gap-10 ">
                 <label className="flex flex-col font-bold">
                     <span className="flex"><IconTextCaption />Nombre del evento:</span>
-                    <input id={"name"} type="text"  className="border-2 p-2 rounded-md" />
+                    <input id={"name"} type="text" className="border-2 p-2 rounded-md" />
                 </label>
                 <div className="flex flex-col mt-2">
                     <span className="mt-2 flex justify-center w-full font-bold"><IconTextGrammar />Descripción:</span>
@@ -88,31 +102,47 @@ export const AdminEvents = () => {
                     <label className="flex flex-col font-bold">
                         Día/Mes/Año - Hora/Minuto
                         <input id={"date"} type="datetime-local" className="border-2 p-2 rounded-md" />
-                    </label>                    
+                    </label>
                 </div>
                 <div className="flex flex-col mt-2">
                     <label className="flex flex-col font-bold">
-                    <span className="mt-2 flex justify-center w-full font-bold"><IconMapRoute />Ciudad:</span>
+                        <span className="mt-2 flex justify-center w-full font-bold"><IconMapRoute />Ciudad:</span>
                         <input id={"city"} type="text" className="border-2 p-2 rounded-md" />
-                    </label>                    
+                    </label>
                 </div>
                 <div className="flex flex-col mt-2">
                     <label className="flex font-bold">
                         <span className="mt-2 flex w-full font-bold"><IconImageInPicture />Imagen de portada:</span>
                         <div className=" overflow-y-auto w-full max-h-[200px]">
-                            <Gallery mediaItems={images} isToEvent={true}/>
+                            <Gallery mediaItems={images} isToEvent={true} />
                         </div>
                     </label>
                     <input id={'imageUrl'} type={'text'} value={imagePath} />
                 </div>
                 <div className="mt-5">
-                <CTA callToAction={{
-                    text: "Crear",
-                    icon: IconDatabaseEdit
-                }}linkClass="btn bg-yellow-400" />
+                    <CTA callToAction={{
+                        text: "Crear",
+                        icon: IconDatabaseEdit
+                    }} linkClass="btn bg-yellow-400" />
                 </div>
             </form>
         </div>
+
+        <Dialog open={!!open} onOpenChange={() => { setOpen(false); setEmpty(false); }}>
+            <DialogContent className="max-w-80 bg-neutral-100 dark:bg-neutral-900 flex flex-col justify-center items-center">
+                {!empty ?
+                    <>
+                        <IconCheck className="text-green-500" />
+                        <h1>¡Evento creado!</h1>
+                    </>
+                    :
+                    <>
+                        <IconExclamationCircleFilled className="text-red-500" />
+                        <h1>Rellene todos los campos</h1>
+                    </>
+                }
+            </DialogContent>
+        </Dialog>
     </section>
 
 }
