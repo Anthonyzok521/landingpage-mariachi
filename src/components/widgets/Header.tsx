@@ -10,7 +10,7 @@ import { headerData } from '~/shared/data/global.data';
 import { usePathname } from 'next/navigation';
 
 type Props = {
-  login: boolean
+  login?: boolean
 };
 
 const adminLink = [{

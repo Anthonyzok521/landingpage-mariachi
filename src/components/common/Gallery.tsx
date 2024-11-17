@@ -1,7 +1,7 @@
 
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, Suspense, useState } from "react";
 import Image from "next/image";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { cn } from "~/lib/utils";
@@ -12,6 +12,7 @@ import { IconEraser } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage } from "~/lib/reducers";
 import { useRouter } from "next/navigation";
+import CardEventsSkeleton from "../widgets/CardsEventsSkeleton";
 
 type MediaItems = {
     mediaItems: IGallery[]
@@ -26,7 +27,6 @@ export default function Gallery({mediaItems, isAdmin, isToEvent} : MediaItems) {
 
   const selected = () => {
     if(selectedItem){
-      console.log("Selected ", selectedItem.path)
       dispatch(
         uploadImage(selectedItem.path)
       );
@@ -35,13 +35,14 @@ export default function Gallery({mediaItems, isAdmin, isToEvent} : MediaItems) {
   }
 
   const deleteImage = (image?: string) => {
-    console.log(image, "DELETED");
-    fetch('', {method: "DELETE", body: JSON.stringify({_id: image})});
+    fetch(`${process.env.API_URL}/api/delete`, {method: "DELETE", body: JSON.stringify({_id: image})});
     navigate.refresh();
   }
 
   return (
     <>
+    <Suspense fallback={<CardEventsSkeleton />}>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {mediaItems.map((item, index) => (
           <div
@@ -56,7 +57,7 @@ export default function Gallery({mediaItems, isAdmin, isToEvent} : MediaItems) {
                 alt={item.title}
                 fill
                 className={`object-cover transition-transform duration-300 group-hover:scale-105}`}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes={`${!isAdmin ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' : '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw'}`}
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <button
@@ -112,6 +113,7 @@ export default function Gallery({mediaItems, isAdmin, isToEvent} : MediaItems) {
         }
 
       </Dialog>
+    </Suspense>
     </>
   );
 }

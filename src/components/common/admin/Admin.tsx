@@ -1,11 +1,11 @@
 'use client'
 import { Icon24Hours, IconBrandFacebook, IconBrandGoogleMaps, IconBrandInstagram, IconBrandTiktok, IconBrandX, IconDeviceFloppy, IconImageInPicture, IconMail, IconNetwork, IconPhone } from "@tabler/icons-react";
-import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
-import { getConfigs } from "~/app/api";
+import * as api from "~/app/api";
 import { Configs } from "~/shared/types";
 import CTA from "../CTA";
+import Image from "next/image";
 
 export const Admin = () => {
 
@@ -27,7 +27,7 @@ export const Admin = () => {
         const ss = document.querySelector("#ss");
         const banner = document.querySelector("#banner");        
 
-        await fetch('http://192.168.0.6:3000/api/configs/update',{
+        await fetch(`${process.env.API_URL}/api/configs/update`,{
             method: 'PUT',
             body: JSON.stringify({
                 email,
@@ -46,19 +46,13 @@ export const Admin = () => {
     }
 
     useEffect(() => {
-
-        console.log(configs?.contacts.email);
-
-        const api = async () => {
-            //const res = await getConfigs();
-            const data = await fetch('localhost:3000/api/configs', {next: {revalidate: 0}});
-            const res = await data.json();
-            console.log(data)
-            console.log(res)
-            setConfigs(res as Configs);
-        }
-
-        api();
+        const get = async () => {
+            const res = await api.getConfigs();
+            console.log(res[0]);
+            setConfigs(res[0] as Configs);
+        }        
+        get();
+        console.log(configs);
     }, [])
 
     return <section className="flex flex-col gap-5 md:items-center w-full">
@@ -127,7 +121,7 @@ export const Admin = () => {
                     <label className="flex font-bold">
                         <span className="mt-2 flex w-full font-bold"><IconImageInPicture />Imagen de portada:</span>
                         <div className=" relative w-full h-20">
-                            {/* <Image src={configs?.images.banner || ''} sizes="100vw" fill alt="Portada" className="object-contain" /> */}
+                            <Image src={configs?.images.banner || ''} sizes="100vw" fill alt="Portada" className="object-contain" />
                         </div>
                     </label>
                         <input id={"banner"} type="file" className="border-2 p-2 rounded-md" />

@@ -99,7 +99,7 @@ export const AdminEvents = () => {
                 <div className="flex flex-col mt-2">
                     <label className="flex font-bold">
                         <span className="mt-2 flex w-full font-bold"><IconImageInPicture />Imagen de portada:</span>
-                        <div className=" overflow-y-auto w-full h-20">
+                        <div className=" overflow-y-auto w-full max-h-[200px]">
                             <Gallery mediaItems={images} isToEvent={true}/>
                         </div>
                     </label>

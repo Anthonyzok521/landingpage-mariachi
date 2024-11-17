@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { IGallery } from "~/shared/types";
 import * as api from '../api'
 import Gallery from "~/components/common/Gallery";
 

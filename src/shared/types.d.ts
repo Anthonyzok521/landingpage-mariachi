@@ -297,7 +297,14 @@ type IGallery = {
 }
 
 type IAuth = {
-  auth: boolean
+  auth?: boolean
+  token : string
+}
+
+type ILogin = {
+  auth?: boolean
+  message?: string
+  token : string
 }
 
 type Configs = {

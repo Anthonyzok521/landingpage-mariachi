@@ -1,14 +1,12 @@
-import { Metadata } from 'next';
+import { Metadata} from 'next';
 
 import { SITE } from '~/config.js';
 
 import Providers from '~/components/atoms/Providers';
 import Header from '~/components/widgets/Header';
 import Footer2 from '~/components/widgets/Footer2';
-
 import { Inter as CustomFont } from 'next/font/google';
 import '~/assets/styles/base.css';
-import '~/db'
 import { getAuthLogin } from './api';
 import { IAuth } from '~/shared/types';
 

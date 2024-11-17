@@ -4,7 +4,8 @@ import CTA from "./CTA"
 import fontTitle from "~/fonts"
 import { FormEvent, useState } from "react"
 import { useRouter } from "next/navigation"
-
+import * as api from "~/app/api"
+import { ILogin } from "~/shared/types"
 
 export const Login = () => {
 
@@ -14,24 +15,20 @@ export const Login = () => {
     const handleClick = async (e: FormEvent) => {
         e.preventDefault();
         try{
-            const res = await fetch('http://localhost:3000/api/login');
-            const data = await res.json();
-
-            if(data.login && !invalid){                
-                navigator.refresh();
+            const password = document.querySelector('#password') as HTMLInputElement;
+            const login = await api.postAuthLogin(password.value) as ILogin;
+            if(!login.auth && invalid != false){                
+                setInvalid(true);    
                 return;
             }
 
-            setInvalid(true);
-
+            navigator.push('/');
             return;
 
         }catch(e){
             console.log(e);
+            return;
         }
-        
-
-        
     }
 
     return <main className='h-dvh w-full flex justify-center'>

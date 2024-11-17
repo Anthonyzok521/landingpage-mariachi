@@ -15,7 +15,7 @@ import { IGallery } from '~/shared/types'
 export const AdminGallery = () => {
   const [file, setFile] = useState<File | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [images, setImages] = useState<IGallery[]>([{ path: '', title: '', type: '' }]);
+  const [images, setImages] = useState<IGallery[]>([{_id: '', path: '', title: '', type: '' }]);
 
   const allowedTypes = ['.jpg', '.jpeg', '.png', '.mp4', '.ogg']
 

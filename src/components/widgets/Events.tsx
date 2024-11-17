@@ -1,8 +1,8 @@
 'use client';
-import { IconFilter, IconSearch } from "@tabler/icons-react"
+//import { IconFilter, IconSearch } from "@tabler/icons-react"
 import { lazy, Suspense, useEffect, useState } from "react";
 import CardsEventsSkeleton from "./CardsEventsSkeleton";
-import { Locations } from "~/shared/data/pages/locations";
+//import { Locations } from "~/shared/data/pages/locations";
 import { MusicEvent } from "~/shared/types";
 
 const CardsEvents = lazy(() => import("./CardsEvents"));
@@ -13,7 +13,7 @@ interface IEventes {
 
 export const Events = ({ dataEvents }: IEventes) => {
     const [dataEvent, setDataEvent] = useState(dataEvents.reverse())
-    const [filter, setFilter] = useState(dataEvent)
+    /*const [filter, setFilter] = useState(dataEvent)
     const [open, setOpen] = useState<boolean>(false);
     const [search, setSearch] = useState<string>()
     const [date, setDate] = useState<string>("")
@@ -31,39 +31,27 @@ export const Events = ({ dataEvents }: IEventes) => {
         return `${day}/${month}/${year}`
     }
 
-    /* const filterDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const filterDate = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDate(event.target.value)
         const d = formatDate(event.target.value as string)
         const f = d ? dataEvent.filter(({ date }) => date.includes(d) || date.includes(`/${event.target.value.substring(5, 7)}/`)) : dataEvent.reverse()
         setFilter(f);
-    } */
+    } 
 
-    /* const filterTime = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const filterTime = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTime(event.target.value)
         const f = time ? dataEvent.filter(({ date }) => date.includes(`- ${event.target.value}`) || date.includes(`- ${event.target.value.substring(0, 3)}`)) : dataEvent.reverse()
         setFilter(f);
-    } */
+    } 
 
     const filterLocation = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setLocation(event.target.value)
         const f = location ? dataEvent.filter(({ city }) => city.includes(`${event.target.value}`)) : dataEvent.reverse()
         setFilter(f);
-    }
-
-    useEffect(() => {
-
-        const getData = async () => {
-            const res = await fetch('/api/events', { cache: 'no-store' });
-            const data = await res.json()
-            
-            setFilter(data)
-        }
-
-        getData();
-    }, [])
+    }*/
 
     return <>
-        <header>
+        {/* <header>
             <h1 className="leading-tighter font-heading mb-8 text-center text-4xl font-bold tracking-tighter md:mb-16 md:text-5xl">
                 Eventos
             </h1>
@@ -82,12 +70,12 @@ export const Events = ({ dataEvents }: IEventes) => {
                     </div>
                     {open &&
                         <div className="flex gap-2 max-lg:flex-col justify-between w-full">
-                            {/* <label className="flex justify-between items-center">Buscar por fecha:
+                            <label className="flex justify-between items-center">Buscar por fecha:
                                 <input className="p-1 rounded-md" type="date" value={date} onChange={filterDate} />
                             </label>
                             <label className="flex justify-between items-center">Buscar por hora:
                                 <input className="p-1 rounded-md" type="time" value={time} onChange={filterTime} />
-                            </label> */}
+                            </label>
                             <label className="flex justify-between items-center">Buscar por ciudad:
                                 <select className="p-1 rounded-md" name="location" value={location} onChange={filterLocation}>
                                     <option value={'-- - --'}>-- - --</option>
@@ -98,7 +86,7 @@ export const Events = ({ dataEvents }: IEventes) => {
                     }
                 </div>
             </form>
-        </header>
+        </header> */}
         <Suspense fallback={<CardsEventsSkeleton />}>
             <CardsEvents events={dataEvents} />
         </Suspense>

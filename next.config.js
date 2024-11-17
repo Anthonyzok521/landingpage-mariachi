@@ -48,9 +48,9 @@ module.exports = {
         pathname: '/production/images/**',
       },
       {
-        protocol: 'http',
-        hostname: 'http://192.168.0.6',
-        port: '3000',
+        protocol: 'https',
+        hostname: 'api.mariachici.com',
+        port: '',
         pathname: '/api/**',
       },
     ],

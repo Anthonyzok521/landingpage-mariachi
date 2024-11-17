@@ -31,8 +31,7 @@ const CardsEvents = ({ events, isAdmin }: IE) => {
   }
 
   const deleteEvent = (event: MusicEvent) => {
-    console.log(event._id);
-    fetch('', {
+    fetch(`${process.env.API_URL}/api/delete`, {
       method: 'DELETED',
       body: JSON.stringify({ id: event._id })
     });

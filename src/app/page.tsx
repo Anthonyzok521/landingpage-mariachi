@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const data = await api.getConfigs();
   const images = data[0].images;
-
+  
   return (
     <>
       <Hero images={images}/>
