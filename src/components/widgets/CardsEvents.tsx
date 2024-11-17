@@ -8,8 +8,6 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Calendar, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { MusicEvent } from '~/shared/types'
-import { useRouter } from 'next/navigation'
-
 interface IE {
   events: MusicEvent[]
   isAdmin?: Boolean
@@ -18,7 +16,6 @@ interface IE {
 const CardsEvents = ({ events, isAdmin }: IE) => {
 
   const [selectedEvent, setSelectedEvent] = useState<MusicEvent | null>(null)
-  const navigate = useRouter();
 
   const getDateColor = (date: Date) => {
     if (isBefore(date, new Date()) && !isToday(date)) {
@@ -31,8 +28,17 @@ const CardsEvents = ({ events, isAdmin }: IE) => {
   }
 
   const deleteEvent = (event: MusicEvent) => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/delete/${event._id}`, {method: 'DELETED'});
-    navigate.refresh();
+    console.log(event);
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/delete/${event._id}`, {
+      mode: 'cors',
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETED"
+      }, method: 'DELETED'
+    });
+    //location.href = '/admin/events';
   }
 
   return (

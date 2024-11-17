@@ -87,7 +87,7 @@ export const Admin = () => {
         <div className="w-full justify-end">
             <nav className="w-full">
                 <ul className="w-full flex justify-end p-10 gap-5 bg-black/10">
-                    <li><Link href={'/admin/events'} title="Crear un evento" className={`hover:text-yellow-400`}>Crear un evento</Link></li>
+                    <li><Link href={'/admin/events'} title="Administrar eventos" className={`hover:text-yellow-400`}>Administrar eventos</Link></li>
                     <li><Link href={'/admin/gallery'} title="Administrar galería" className={`hover:text-yellow-400`}>Administrar galería</Link></li>
                     <li><Link href={'/admin/logout'} title="Cerrar sesión" className={`hover:text-yellow-400`}>Cerrar sesión</Link></li>
                 </ul>
@@ -168,7 +168,11 @@ export const Admin = () => {
                 </div>
             </form>
         </div>
-        <Dialog open={!!open} onOpenChange={() => {setOpen(false); setEmpty(false);}}>
+        <Dialog open={!!open} onOpenChange={() => {
+            setOpen(false); if (!empty) {
+                location.href = '/admin';
+            } setEmpty(false);
+        }}>
             <DialogContent className="max-w-80 bg-neutral-100 dark:bg-neutral-900 flex flex-col justify-center items-center">
                 {!empty ?
                     <>

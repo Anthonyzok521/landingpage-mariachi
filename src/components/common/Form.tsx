@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { FormProps } from '../../shared/types';
+import { Dialog, DialogContent } from '../ui/dialog';
+import { IconCheck } from '@tabler/icons-react';
 
 interface IForm {
   form: FormProps
@@ -10,12 +12,13 @@ interface IForm {
   className?: string
 }
 
-const Form = ({form, btnPosition, className}: IForm) => {
+const Form = ({ form, btnPosition, className }: IForm) => {
 
   const [inputValues, setInputValues] = useState([]);
   const [radioBtnValue, setRadioBtnValue] = useState('');
   const [textareaValues, setTextareaValues] = useState('');
   const [checkedState, setCheckedState] = useState<boolean[]>(new Array(form.checkboxes && form.checkboxes.length).fill(false));
+  const [open, setOpen] = useState<Boolean>();
 
   // Update the value of the entry fields
   const changeInputValueHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,8 +51,36 @@ const Form = ({form, btnPosition, className}: IForm) => {
     });
   };
 
-  return (
-    <form id="contactForm" className={twMerge('', className)}>
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const email = document.querySelector('#email') as HTMLInputElement;
+    const name = document.querySelector('#name') as HTMLInputElement;
+    const message = document.querySelector('#textarea') as HTMLTextAreaElement;
+
+    if (!email.value ||
+      !name.value ||
+      !message.value) {
+      return;
+    }
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/mail`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email.value,
+        name: name.value,
+        message: message.value
+      })
+    })
+
+    setOpen(true);
+  }
+
+  return (<>
+    <form id="contactForm" onSubmit={handleSubmit} className={twMerge('', className)}>
       {form.title && <h2 className={`${form.description ? 'mb-2' : 'mb-4'} text-2xl font-bold`}>{form.title}</h2>}
       {form.description && <p className="mb-4">{form.description}</p>}
       <div className="mb-6">
@@ -70,6 +101,7 @@ const Form = ({form, btnPosition, className}: IForm) => {
                   onChange={changeInputValueHandler}
                   placeholder={placeholder}
                   className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+                  required
                 />
               </div>
             ))}
@@ -89,6 +121,7 @@ const Form = ({form, btnPosition, className}: IForm) => {
                     checked={radioBtnValue === `value${index}`}
                     onChange={changeRadioBtnsHandler}
                     className="cursor-pointer"
+                    required
                   />
                   <label htmlFor={label} className="ml-2">
                     {label}
@@ -113,6 +146,7 @@ const Form = ({form, btnPosition, className}: IForm) => {
               onChange={(e) => changeTextareaHandler(e)}
               placeholder={form.textarea.placeholder}
               className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"
+              required
             />
           </div>
         )}
@@ -137,14 +171,26 @@ const Form = ({form, btnPosition, className}: IForm) => {
           </div>
         )}
       </div>
-        <div
-          className={`${btnPosition === 'left' ? 'text-left' : btnPosition === 'right' ? 'text-right' : 'text-center'}`}
-        >
-          <button type='button' className="btn btn-primary sm:mb-0">
-            Enviar
-          </button>
-        </div>
+      <div
+        className={`${btnPosition === 'left' ? 'text-left' : btnPosition === 'right' ? 'text-right' : 'text-center'}`}
+      >
+        <button type='button' className="btn btn-primary sm:mb-0">
+          Enviar
+        </button>
+      </div>
     </form>
+    <Dialog open={!!open} onOpenChange={() => {
+      setOpen(false);
+      location.href = '/';
+    }}>
+      <DialogContent className="max-w-80 bg-neutral-100 dark:bg-neutral-900 flex flex-col justify-center items-center">
+
+        <IconCheck className="text-green-500" />
+        <h1>¡Mensaje enviado!</h1>
+
+      </DialogContent>
+    </Dialog>
+  </>
   );
 };
 

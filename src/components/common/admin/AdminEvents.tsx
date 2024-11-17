@@ -31,19 +31,20 @@ export const AdminEvents = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        const name = document.querySelector("#name") as HTMLInputElement;
-        const description = document.querySelector("#description") as HTMLInputElement;
-        const fullDescription = document.querySelector("#fullDescription") as HTMLInputElement;
+        const name = document.querySelector("#name") as HTMLDivElement;
+        const description = document.querySelector("#description") as HTMLDivElement;
+        const fullDescription = document.querySelector("#fullDescription") as HTMLTextAreaElement;
         const date = document.querySelector("#date") as HTMLInputElement;
-        const city = document.querySelector("#city") as HTMLInputElement;
-        const imageUrl = document.querySelector("#imageUrl") as HTMLInputElement;
+        const city = document.querySelector("#city") as HTMLDivElement;
+        const imageUrl = document.querySelector("#imageUrl") as HTMLDivElement;
 
-        if (!name.value ||
-            !description.value ||
+        if (!name.textContent ||
+            !description.textContent ||
             !fullDescription.value ||
             !date.value ||
-            !city.value ||
-            !imageUrl.value) {
+            !city.textContent ||
+            !imageUrl.textContent) {
+            console.log('XD')
             setEmpty(true);
             setOpen(true);
             return;
@@ -51,15 +52,20 @@ export const AdminEvents = () => {
 
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/create`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
-                name: name.value,
-                description: description.value,
+                name: name.textContent,
+                description: description.textContent,
                 fullDescription: fullDescription.value,
                 date: date.value,
-                city: city.value,
-                imageUrl: imageUrl.value
+                city: city.textContent,
+                imageUrl: imageUrl.textContent
             })
         })
+
+        setOpen(true);
     }
 
     return <section className="flex flex-col justify-center">
@@ -84,13 +90,13 @@ export const AdminEvents = () => {
             <form onSubmit={handleSubmit} className="border-2 p-2 rounded-md gap-10 ">
                 <label className="flex flex-col font-bold">
                     <span className="flex"><IconTextCaption />Nombre del evento:</span>
-                    <input id={"name"} type="text" className="border-2 p-2 rounded-md" />
+                    <div id={"name"} className="border-2 p-2 rounded-md" contentEditable></div>
                 </label>
                 <div className="flex flex-col mt-2">
                     <span className="mt-2 flex justify-center w-full font-bold"><IconTextGrammar />Descripción:</span>
                     <label className="flex flex-col font-bold">
                         Descripción resumida:
-                        <input id={"description"} type="text" className="border-2 p-2 rounded-md" />
+                        <div id={"description"} className="border-2 p-2 rounded-md" contentEditable></div>
                     </label>
                     <label className="flex flex-col font-bold">
                         Descripción completa (opcional):
@@ -101,13 +107,13 @@ export const AdminEvents = () => {
                     <span className="mt-2 flex justify-center w-full font-bold"><IconCalendar />Fecha que se realizará el evento:</span>
                     <label className="flex flex-col font-bold">
                         Día/Mes/Año - Hora/Minuto
-                        <input id={"date"} type="datetime-local" className="border-2 p-2 rounded-md" />
+                        <input id={"date"} type="datetime-local" className="border-2 p-2 rounded-md" contentEditable />
                     </label>
                 </div>
                 <div className="flex flex-col mt-2">
                     <label className="flex flex-col font-bold">
                         <span className="mt-2 flex justify-center w-full font-bold"><IconMapRoute />Ciudad:</span>
-                        <input id={"city"} type="text" className="border-2 p-2 rounded-md" />
+                        <div id={"city"} className="border-2 p-2 rounded-md" contentEditable></div>
                     </label>
                 </div>
                 <div className="flex flex-col mt-2">
@@ -117,18 +123,24 @@ export const AdminEvents = () => {
                             <Gallery mediaItems={images} isToEvent={true} />
                         </div>
                     </label>
-                    <input id={'imageUrl'} type={'text'} value={imagePath} />
+                    <div id={'imageUrl'} className="hidden">{imagePath}</div>
                 </div>
                 <div className="mt-5">
                     <CTA callToAction={{
                         text: "Crear",
-                        icon: IconDatabaseEdit
-                    }} linkClass="btn bg-yellow-400" />
+                        icon: IconDatabaseEdit,
+                    }} linkClass="btn bg-yellow-400" action={true} submit={true} />
                 </div>
             </form>
         </div>
 
-        <Dialog open={!!open} onOpenChange={() => { setOpen(false); setEmpty(false); }}>
+        <Dialog open={!!open} onOpenChange={() => {
+            setOpen(false);
+            if (!empty) {
+                location.href = '/admin/events';
+            }
+            setEmpty(false);
+        }}>
             <DialogContent className="max-w-80 bg-neutral-100 dark:bg-neutral-900 flex flex-col justify-center items-center">
                 {!empty ?
                     <>

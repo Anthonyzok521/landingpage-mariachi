@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import { CallToActionType, LinkOrButton } from '~/shared/types';
 
-const CTA = ({ callToAction, containerClass, linkClass, iconClass, onClickHandle, action }: LinkOrButton) => {
+const CTA = ({ callToAction, containerClass, linkClass, iconClass, onClickHandle, action, submit }: LinkOrButton) => {
   const { text, href, icon: Icon, targetBlank } = callToAction as CallToActionType;
 
   return (
@@ -10,7 +10,7 @@ const CTA = ({ callToAction, containerClass, linkClass, iconClass, onClickHandle
       {(text || Icon) && (
         <div className={twMerge('flex w-auto cursor-pointer', containerClass)}>
 
-          {action ? <button type='button' onClick={onClickHandle} className={twMerge('inline-flex items-center justify-center w-full sm:mb-0 ', linkClass)}>
+          {action ? <button type={submit ? 'submit' : 'button'} onClick={onClickHandle} className={twMerge('inline-flex items-center justify-center w-full sm:mb-0 ', linkClass)}>
           {Icon && <Icon className={twMerge(`w-5 h-5 ${text ? 'mr-1 rtl:mr-0 rtl:ml-1' : ''}`, iconClass)} />}
           {text}
           </button>

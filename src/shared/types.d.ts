@@ -48,6 +48,7 @@ type LinkOrButton = {
   linkClass?: string;
   iconClass?: string;
   action?: Boolean;
+  submit?: Boolean;
   onClickHandle?: () => void;
 };
 
