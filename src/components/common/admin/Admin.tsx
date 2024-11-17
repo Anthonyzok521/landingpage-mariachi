@@ -48,11 +48,9 @@ export const Admin = () => {
     useEffect(() => {
         const get = async () => {
             const res = await api.getConfigs();
-            console.log(res[0]);
             setConfigs(res[0] as Configs);
         }        
         get();
-        console.log(configs);
     }, [])
 
     return <section className="flex flex-col gap-5 md:items-center w-full">
@@ -121,7 +119,7 @@ export const Admin = () => {
                     <label className="flex font-bold">
                         <span className="mt-2 flex w-full font-bold"><IconImageInPicture />Imagen de portada:</span>
                         <div className=" relative w-full h-20">
-                            <Image src={configs?.images.banner || ''} sizes="100vw" fill alt="Portada" className="object-contain" />
+                            <Image src={configs?.images.banner || '/mci_logo.png'} sizes="100vw" fill alt="Portada" className="object-contain" />
                         </div>
                     </label>
                         <input id={"banner"} type="file" className="border-2 p-2 rounded-md" />

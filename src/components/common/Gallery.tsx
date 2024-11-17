@@ -35,7 +35,7 @@ export default function Gallery({mediaItems, isAdmin, isToEvent} : MediaItems) {
   }
 
   const deleteImage = (image?: string) => {
-    fetch(`${process.env.API_URL}/api/delete`, {method: "DELETE", body: JSON.stringify({_id: image})});
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/delete`, {method: "DELETE", body: JSON.stringify({_id: image})});
     navigate.refresh();
   }
 
