@@ -1,11 +1,10 @@
 import { IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 import { footerData2 } from '~/shared/data/global.data';
-import { ConfigCollection } from '~/utils/configCollections';
+import * as api from '~/app/api'
 
 const Footer2 = async () => {
-  const c = await ConfigCollection.getContacts();
-  const cc = Object.values(c)[2] as any;
-  const contacts = cc.contacts
+  const data = await api.getConfigs()
+  const contacts = data[0].contacts;
   
   const { links, footNote } = footerData2;
 

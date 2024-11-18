@@ -1,25 +1,12 @@
-'use client'
 import Image from 'next/image';
-import { IImage } from '~/shared/types';
-
 import fontTitle from '~/fonts';
-import { useEffect, useState } from 'react';
-import { IconPhone } from '@tabler/icons-react';
+import { IImage } from '~/shared/types';
 import CTA from '../common/CTA';
+import { IconPhone } from '@tabler/icons-react';
 
-const Hero = () => {
-  const [image, setImage] = useState<IImage>();
-  useEffect(() => {
-    const getImageBanner = async () => {
-      const res = await fetch('/api/images');
-      const data = await res.json();
-      setImage(data.banner);
-    }
-
-    getImageBanner();
-  }, [])
-
+export const Hero = ({images}: IImage) => {
   return (
+
     <section id="heroOne">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="py-12 md:py-20">
@@ -46,17 +33,16 @@ const Hero = () => {
           <div className="relative m-auto max-w-5xl max-h-[1160px] overflow-hidden">
             <Image
               className="mx-auto h-auto w-full object-cover origin-bottom rounded-md bg-gray-400 dark:bg-slate-700"
-              src={image?.src || 'https://placehold.jp/1200x600.png'}
+              src={images.banner || 'https://placehold.jp/1200x600.png'}
               alt={'Portada'}
               width={1024}
               height={607}
               sizes="(max-width: 64rem) 100vw, 1024px"
+              quality={50}
             />
           </div>
         </div>
       </div>
     </section>
-  );
+);
 };
-
-export default Hero;

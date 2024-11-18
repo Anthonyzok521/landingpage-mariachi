@@ -2,7 +2,7 @@ import Form from '../common/Form';
 import Headline from '../common/Headline';
 import WidgetWrapper from '../common/WidgetWrapper';
 import { IconClock, IconMapPin, IconPhoneCall } from '@tabler/icons-react';
-import { ConfigCollection } from '~/utils/configCollections';
+import * as api from '~/app/api'
 
 const form = {
   title: 'Enviar un correo',
@@ -37,12 +37,10 @@ const header = {
 }
 
 const Contact = async () => {
-  const c = await ConfigCollection.getContacts();
-  const cc = Object.values(c)[2] as any;
-  const contacts = cc.contacts
-  const h = await ConfigCollection.getHours();
-  const hh = Object.values(h)[2] as any;
-  const hours = hh.hours;
+  const data = await api.getConfigs()
+  const contacts = data[0].contacts;
+  const hours = data[0].hours;
+  
 
   const items = [
     {

@@ -1,14 +1,14 @@
-import { Metadata } from 'next';
+import { Metadata} from 'next';
 
 import { SITE } from '~/config.js';
 
 import Providers from '~/components/atoms/Providers';
 import Header from '~/components/widgets/Header';
 import Footer2 from '~/components/widgets/Footer2';
-
 import { Inter as CustomFont } from 'next/font/google';
 import '~/assets/styles/base.css';
-import '~/db'
+import { getAuthLogin } from './api';
+import { IAuth } from '~/shared/types';
 
 const customFont = CustomFont({ subsets: ['latin'], variable: '--font-custom' });
 
@@ -24,13 +24,19 @@ export const metadata: Metadata = {
   description: SITE.description,
 };
 
-export default function RootLayout({ children }: LayoutProps) {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function RootLayout({ children }: LayoutProps) {
+
+  const data = await getAuthLogin() as IAuth;
+  const login = data.auth;
+
   return (
     <html lang="es" className={`motion-safe:scroll-smooth 2xl:text-[24px] ${customFont.variable} font-sans`}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="La mejor opción para tus fiestas y eventos. Mariachi Cocula Internacional acompaña a grandes artistas. Y tiene el mejor repertorio para tu espectáculo." />
         <meta property="og:url" content="https://mariachici.com" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Mariachi Cocula Internacional" />
@@ -45,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps) {
       </head>
       <body className="tracking-tight antialiased text-gray-900 dark:text-slate-300 dark:bg-slate-900">
         <Providers>
-          <Header />
+          <Header login={login} />
           <main>{children}</main>
           <Footer2 />
         </Providers>

@@ -6,7 +6,6 @@ module.exports = {
   reactStrictMode: true,
 
   trailingSlash: SITE.trailingSlash,
-  basePath: SITE.basePathname !== '/' ? SITE.basePathname : '',
 
   swcMinify: true,
   poweredByHeader: false,
@@ -28,6 +27,18 @@ module.exports = {
         protocol: 'https',
         hostname: 'cdn.mariachici.com',
         port: '',
+        pathname: '/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.mariachici.com',
+        port: '',
+        pathname: '/videos/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.mariachici.com',
+        port: '',
         pathname: '/images/**',
       },
       {
@@ -35,6 +46,12 @@ module.exports = {
         hostname: 'opengraph.b-cdn.net',
         port: '',
         pathname: '/production/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.mariachici.com',
+        port: '',
+        pathname: '/api/**',
       },
     ],
   },
