@@ -41,21 +41,21 @@ export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) 
     <>
       <Suspense fallback={<CardEventsSkeleton />}>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className={`grid grid-cols-2 md:grid-cols-2 ${!isToEvent ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-4`} >
           {mediaItems.map((item, index) => (
             <div
               key={`i-${index}`}
               className={cn(
-                `group relative rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800 ${isToEvent && selectedItem?._id == item._id ? 'border-4 shadow-sm border-yellow-400' : ''}`
+                `group relative rounded-lg overflow-hidden bg-neutral-200 dark:bg-neutral-800 ${isToEvent && selectedItem?._id == item._id ? 'border-4 shadow-sm border-yellow-400' : ''} ${isAdmin && !isToEvent ? `max-md:w-40 max-md:h-40 ${isToEvent ? '' : 'md:scale-75'}` : ''}`
               )}
             >
-              <div className="aspect-square relative">
+              <div className={`aspect-square relative`}>
                 <Image
                   src={item.type === "image" ? item.path : "/mci_logo.png"}
                   alt={item.title}
                   fill
-                  className={`object-cover transition-transform duration-300 group-hover:scale-105}`}
-                  sizes={`${!isAdmin ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' : '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw'}`}
+                  className={`object-cover transition-transform duration-300 group-hover:scale-105`}
+                  sizes={`(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw`}
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <button

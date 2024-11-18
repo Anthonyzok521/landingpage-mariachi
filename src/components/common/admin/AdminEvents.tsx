@@ -99,7 +99,7 @@ export const AdminEvents = () => {
                         <div id={"description"} className="border-2 p-2 rounded-md" contentEditable></div>
                     </label>
                     <label className="flex flex-col font-bold">
-                        Descripción completa (opcional):
+                        Descripción completa:
                         <textarea id={"fullDescription"} className="border-2 p-2 rounded-md"></textarea>
                     </label>
                 </div>

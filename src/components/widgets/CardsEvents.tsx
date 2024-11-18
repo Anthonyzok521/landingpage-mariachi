@@ -37,6 +37,7 @@ const CardsEvents = ({ events, isAdmin }: IE) => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Eventos Musicales</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {events.length == 0 && <h2>No hay eventos</h2>}
         {events.map((event, index) => (
           <Card key={`c-${index}`} className="overflow-hidden">
             <Image src={event.imageUrl} alt={event.name} width={200} height={200} className="w-full h-48 object-cover" />
