@@ -31,6 +31,7 @@ const CardsEvents = ({ events, isAdmin }: IE) => {
     console.log(event);
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/delete/${event._id}`, {
       mode: 'cors',
+      credentials: 'include',
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Origin": "*",
