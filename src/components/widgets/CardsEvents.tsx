@@ -29,17 +29,8 @@ const CardsEvents = ({ events, isAdmin }: IE) => {
 
   const deleteEvent = (event: MusicEvent) => {
     console.log(event);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/delete/${event._id}`, {
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH,DELETED"
-      }, method: 'DELETED'
-    });
-    //location.href = '/admin/events';
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/delete/${event._id}`);
+    location.href = '/admin/events';
   }
 
   return (

@@ -33,7 +33,7 @@ export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) 
   }
 
   const deleteImage = (image?: string) => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery/delete/${image}`, { method: "DELETE" });
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery/delete/${image}`);
     location.href = '/admin/gallery';
   }
 
