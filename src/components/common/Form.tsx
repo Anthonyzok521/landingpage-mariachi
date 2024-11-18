@@ -58,6 +58,8 @@ const Form = ({ form, btnPosition, className }: IForm) => {
     const name = document.querySelector('#name') as HTMLInputElement;
     const message = document.querySelector('#textarea') as HTMLTextAreaElement;
 
+    console.log(email.value, name.value, message.value);
+
     if (!email.value ||
       !name.value ||
       !message.value) {
@@ -174,7 +176,7 @@ const Form = ({ form, btnPosition, className }: IForm) => {
       <div
         className={`${btnPosition === 'left' ? 'text-left' : btnPosition === 'right' ? 'text-right' : 'text-center'}`}
       >
-        <button type='button' className="btn btn-primary sm:mb-0">
+        <button type='submit' className="btn btn-primary sm:mb-0">
           Enviar
         </button>
       </div>
