@@ -2,14 +2,14 @@ import Image from "next/image";
 import fontTitle from "~/fonts";
 
 const Logo = () => (
-  <span className={`${fontTitle.className} text-yellow-500 ml-2 self-center whitespace-nowrap text-2xl font-bold md:text-xl`}>
+  <div className={`ml-2 flex justify-center items-center w-max h-full`}>
     <Image
       src={'/mci_logo.png'}
       alt="logo"
-      width={80}
-      height={80}
+      width={50}
+      height={50}
     />
-  </span>
+  </div>
 );
 
 export default Logo;

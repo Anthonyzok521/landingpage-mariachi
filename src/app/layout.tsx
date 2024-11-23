@@ -1,4 +1,5 @@
-import { Metadata} from 'next';
+/* eslint-disable @next/next/no-sync-scripts */
+import { Metadata } from 'next';
 
 import { SITE } from '~/config.js';
 
@@ -35,6 +36,10 @@ export default async function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="es" className={`motion-safe:scroll-smooth 2xl:text-[24px] ${customFont.variable} font-sans`}>
       <head>
+
+        {/* // eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src='/googletag.js'></script>
+
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:url" content="https://mariachici.com" />
@@ -50,6 +55,10 @@ export default async function RootLayout({ children }: LayoutProps) {
         <meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/c070be28-c39b-4ffa-978c-0b632091376a.png?token=Aq-bwiQcbO-YxWRLsonSO_86Ou7TfZMYxJXMvmS_k-4&height=630&width=1200&expires=33264842989" />
       </head>
       <body className="tracking-tight antialiased text-gray-900 dark:text-slate-300 dark:bg-slate-900">
+
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P6QSXPSL"
+          height="0" width="0" style={{display:'none', visibility:'hidden'}}></iframe></noscript>
+
         <Providers>
           <Header login={login} />
           <main>{children}</main>

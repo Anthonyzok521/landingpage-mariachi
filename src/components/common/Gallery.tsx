@@ -51,7 +51,7 @@ export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) 
             >
               <div className={`aspect-square relative`}>
                 <Image
-                  src={item.type === "image" ? item.path : "/mci_logo.png"}
+                  src={item.type === "image" ? item.path : item.type === "video" ? "/video.svg" : "/mci_logo.png"}
                   alt={item.title}
                   fill
                   className={`object-cover transition-transform duration-300 group-hover:scale-105`}
