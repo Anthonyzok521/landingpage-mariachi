@@ -59,6 +59,7 @@ export const AdminGallery = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery/create`, {
       method: 'POST',
       body: data,
+      credentials: 'include'
     })
 
     setOpen(true);
