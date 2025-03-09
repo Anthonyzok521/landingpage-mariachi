@@ -1,27 +1,27 @@
 'use client'
-
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react'
-import { Button } from "~/components/ui/button"
+/* import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
-import { AlertCircle, FileUp } from 'lucide-react'
+import { AlertCircle, FileUp } from 'lucide-react' */
 import Link from 'next/link'
 import { IconArrowBack, IconCheck } from '@tabler/icons-react'
 import Gallery from '../Gallery'
 import * as api from '../../../app/api'
 import { IGallery } from '~/shared/types'
-import { Dialog, DialogContent } from '~/components/ui/dialog'
-import { useRouter } from 'next/navigation'
+/* import { Dialog, DialogContent } from '~/components/ui/dialog'
+import { useRouter } from 'next/navigation' */
+import { MultimediaUploadForm } from '~/components/multimedia-upload-form'
 
 export const AdminGallery = () => {
-  const [file, setFile] = useState<File | null>(null);
+  /* const [file, setFile] = useState<File | null>(null);
   const [open, setOpen] = useState<Boolean>();
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null); */
   const [images, setImages] = useState<IGallery[]>([{ _id: '', path: '', title: '', type: '' }]);
-  const [type, setType] = useState<string>();
-  const [title, setTitle] = useState<string>();
-  const navigation = useRouter();
+  /* const [type, setType] = useState<string>();
+  const [title, setTitle] = useState<string>(); */
+  /* const navigation = useRouter();
 
   const allowedTypes = ['.jpg', '.jpeg', '.png', '.mp4', '.ogg']
 
@@ -59,12 +59,11 @@ export const AdminGallery = () => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/gallery/create`, {
       method: 'POST',
       body: data,
-      credentials: 'include'
     })
 
     setOpen(true);
     setFile(null)
-  }
+  } */
 
   useEffect(() => {
     const get = async () => {
@@ -91,8 +90,8 @@ export const AdminGallery = () => {
       <div className='overflow-y-auto h-96 w-full scale-75'>
         <Gallery mediaItems={images} isAdmin={true} />
       </div>
-
-      <form onSubmit={handleSubmit}  method="POST" className="space-y-6 max-w-md mx-auto p-6 bg-card rounded-lg shadow-md">
+      <MultimediaUploadForm />
+      {/* <form onSubmit={handleSubmit}  method="POST" className="space-y-6 max-w-md mx-auto p-6 bg-card rounded-lg shadow-md">
         <div>
           <Label htmlFor="file-upload" className="block text-sm font-medium mb-2">
             Selecciona una imagen o video
@@ -136,7 +135,7 @@ export const AdminGallery = () => {
           <h1>Imagen subida a la galería</h1>
 
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </section>
   </>
 

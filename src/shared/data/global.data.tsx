@@ -39,7 +39,7 @@ export const footerData2: FooterProps = {
   footNote: (
     <div className="flex gap-32 mr-4 rtl:mr-0 rtl:ml-4 text-sm">
       <div>
-      <span className="float-left rtl:float-right mr-1.5 rtl:mr-0 rtl:ml-1.5 h-5 w-5 rounded-sm bg-[url(https://acteam.dev/ac-logo.svg)] bg-cover md:-mt-0.5 md:h-8 md:w-[34px] lg:w-10 lg:h-10"></span>
+      <span className="float-left rtl:float-right mr-1.5 rtl:mr-0 rtl:ml-1.5 h-5 w-[40px] dark:bg-[url(https://acteam.dev/favicon-light.svg)] bg-[url(https://acteam.dev/favicon.svg)] bg-cover"></span>
       <span>
         Creado por{' '}
         <a

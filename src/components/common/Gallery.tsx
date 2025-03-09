@@ -1,4 +1,3 @@
-
 "use client";
 
 import { FormEvent, Suspense, useState } from "react";
@@ -12,6 +11,7 @@ import { IconEraser } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
 import { uploadImage } from "~/lib/reducers";
 import CardEventsSkeleton from "../widgets/CardsEventsSkeleton";
+import ReactPlayer from 'react-player';
 
 type MediaItems = {
   mediaItems: IGallery[]
@@ -21,6 +21,7 @@ type MediaItems = {
 
 export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) {
   const [selectedItem, setSelectedItem] = useState<(IGallery | null)>(null);
+  const [videoThumbnails, setVideoThumbnails] = useState<{ [key: string]: string }>({});
   const dispatch = useDispatch();
 
   const selected = () => {
@@ -37,10 +38,25 @@ export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) 
     location.href = '/admin/gallery';
   }
 
+  const handleVideoReady = (url: string, player: ReactPlayer) => {
+    const videoElement = player.getInternalPlayer() as HTMLVideoElement;
+    videoElement.currentTime = 0; // Ensure the video is at the start
+    videoElement.onloadeddata = () => {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      if (context) {
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+        const thumbnail = canvas.toDataURL();
+        setVideoThumbnails(prev => ({ ...prev, [url]: thumbnail }));
+      }
+    };
+  }
+
   return (
     <>
       <Suspense fallback={<CardEventsSkeleton />}>
-
         <div className={`grid grid-cols-2 md:grid-cols-2 ${!isToEvent ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-4`} >
           {mediaItems.map((item, index) => (
             <div
@@ -50,13 +66,23 @@ export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) 
               )}
             >
               <div className={`aspect-square relative`}>
-                <Image
-                  src={item.type === "image" ? item.path : item.type === "video" ? "/video.svg" : "/mci_logo.png"}
-                  alt={item.title}
-                  fill
-                  className={`object-cover transition-transform duration-300 group-hover:scale-105`}
-                  sizes={`(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw`}
-                />
+                {item.type === "image" ? (
+                  <Image
+                    src={item.path}
+                    alt={item.title}
+                    fill
+                    className={`object-cover transition-transform duration-300 group-hover:scale-105`}
+                    sizes={`(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw`}
+                  />
+                ) : (
+                  <Image
+                    src={videoThumbnails[item.path] || "/video.svg"}
+                    alt={item.title}
+                    fill
+                    className={`object-cover transition-transform duration-300 group-hover:scale-105`}
+                    sizes={`(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw`}
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <button
                     onClick={(e) => {
@@ -92,12 +118,14 @@ export default function Gallery({ mediaItems, isAdmin, isToEvent }: MediaItems) 
                   />
                 </div>
               ) : (
-                <div className="relative aspect-video">
-                  <iframe
-                    src={selectedItem?.path}
-                    className="absolute inset-0 w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                <div className="relative max-md:aspect-video md:w-full md:h-96">
+                  <ReactPlayer
+                    url={selectedItem?.path}
+                    playing={false}
+                    controls={true}
+                    width="100%"
+                    height="100%"
+                    onReady={(player) => selectedItem?.path && handleVideoReady(selectedItem.path, player)}
                   />
                 </div>
               )}
